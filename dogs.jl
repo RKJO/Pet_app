@@ -1,0 +1,1 @@
+{"race": "Mieszaniec", "admission_date": "18.05.2017", "description": "PIES NIE DO ADOPCJI KONTAKT - MAGDA 513 932 996 Sk\u0105d: Warszawa, z ul. Elbl\u0105ska", "age": "5 lat", "sex": "Samica", "species": "Pies", "evidence_number": "0941/17", "name": "Kora", "weight": "25"}
