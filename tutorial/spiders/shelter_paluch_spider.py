@@ -12,11 +12,14 @@ class AnimalSpider(scrapy.Spider):
         yield scrapy.Request(url=urls[0], callback=self.next_page)
 
     def next_page(self, response):
+        next_group_pages = response.css('a.next::attr(href)').extract_first()
         pages = response.css('.animals_btn_list_more::attr(href)').extract()
         for page in pages:
             if page is not None:
                 page = response.urljoin(page)
                 yield scrapy.Request(page, callback=self.parse)
+        if next_group_pages is not None:
+            yield response.follow(next_group_pages, callback=self.next_page)
 
     def parse(self, response):
         yield {
