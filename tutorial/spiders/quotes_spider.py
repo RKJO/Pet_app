@@ -50,6 +50,3 @@ class QuotesSpider(scrapy.Spider):
             yield scrapy.Request(next_page, callback=self.parse)
 
 
-# response.css('li.next a::attr(href)').extract()
-response.css('.animals_btn_list_more::attr(href').extract()
-<a href="/czekam_na_ciebie/wszystkie_zwierzeta_do_adopcji/011802167" class="animals_btn_list_more"></a>
