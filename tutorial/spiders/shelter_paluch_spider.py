@@ -18,8 +18,8 @@ class AnimalSpider(scrapy.Spider):
             if page is not None:
                 page = response.urljoin(page)
                 yield scrapy.Request(page, callback=self.parse)
-        if next_group_pages is not None:
-            yield response.follow(next_group_pages, callback=self.next_page)
+        # if next_group_pages is not None:
+        #     yield response.follow(next_group_pages, callback=self.next_page)
 
     def parse(self, response):
         yield {
@@ -32,4 +32,7 @@ class AnimalSpider(scrapy.Spider):
             'admission_date': response.css('.info').css('span::text').extract()[5].split(' ')[-1],
             'evidence_number': response.css('.info').css('span::text').extract()[6].split(' ')[-1],
             'description': ' '.join(' '.join(response.css('.description::text').extract()).split()),
+            'img_s': response.css('div.ani_image_bottom a::attr(href)').extract(),
+            # todo = find a better way to take a direct url to picture's
+            'url': response.url
         }
