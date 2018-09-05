@@ -1,8 +1,8 @@
 import scrapy
 
 
-class AnimalSpider(scrapy.Spider):
-    name = "animals"
+class PaluchShelterSpider(scrapy.Spider):
+    name = "paluch_shelter"
 
     def start_requests(self):
         urls = [
