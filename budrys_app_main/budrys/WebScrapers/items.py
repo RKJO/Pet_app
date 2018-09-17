@@ -10,11 +10,8 @@ from scrapy_djangoitem import DjangoItem
 from budrys_app.models import Animals
 
 
-class TutorialItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
-
+class AnimalItem(DjangoItem):
+    django_model = Animals
 
 # class AnimalItem(scrapy.Item):
 #     name = scrapy.Field()
@@ -34,5 +31,3 @@ class TutorialItem(scrapy.Item):
 #     url = scrapy.Field()
 
 
-class AnimalItem(DjangoItem):
-    django_model = Animals

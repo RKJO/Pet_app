@@ -1,4 +1,5 @@
 import scrapy
+import datetime
 
 from WebScrapers.items import AnimalItem
 
@@ -22,24 +23,32 @@ class PaluchShelterSpider(scrapy.Spider):
         if next_group_pages is not None:
             yield response.follow(next_group_pages, callback=self.next_page)
 
+    def parse_year(self, age):
+        today = datetime.date.today()
+        years = today.year - int(age)
+        return years
+
+    def pars_administration_date(self, date_str):
+        date = date_str.split(".")
+        date_time = datetime.datetime(year=int(date[-1]), month=int(date[1]), day=int(date[0]))
+        return date_time.strftime('%Y-%m-%d')
+
     def parse(self, response):
         item = AnimalItem()
+
         item['name'] = response.css('.info').css('h5::text').extract_first().split(' ')[-5]
         item['species'] = response.css('.info').css('span::text').extract()[0].split(':')[-1].strip()
         item['race'] = response.css('.info').css('span::text').extract()[1].split(':')[-1].strip()
         item['sex'] = response.css('.info').css('span::text').extract()[2].split(':')[-1].strip()
-        # item['age'] = response.css('.info').css('span::text').extract()[3].split(':')[-1].strip()
-        # todo = use regexp to take only digits of age and weightqq
-        item['weight'] = response.css('.info').css('span::text').extract()[4].split(' ')[1]
-        # item['admission_date'] = response.css('.info').css('span::text').extract()[5].split(' ')[-1]
+        # item['age'] = self.parse_year(response.css('.info').css('span::text').extract()[3].split(' ')[-2])
+        item['weight'] = int(response.css('.info').css('span::text').extract()[4].split(' ')[1])
+        # item['admission_date'] = self.pars_administration_date(response.css('.info').css('span::text').extract()[5].split(' ')[-1])
         item['evidence_number'] = response.css('.info').css('span::text').extract()[6].split(' ')[-1]
         item['description'] = ' '.join(' '.join(response.css('.description::text').extract()).split())
         item['img_main'] = response.urljoin(response.css('#main_image_cont a::attr(href)').extract_first())
         item['img_main_alt'] = response.urljoin(response.css('#main_image_cont img::attr(src)').extract_first())
-        # item['img_s'] = [response.urljoin(url) for url in response.css('div.ani_image_bottom a::attr(href)').extract()]
+        item['img_s'] = [response.urljoin(url) for url in response.css('div.ani_image_bottom a::attr(href)').extract()[0:3]]
         item['location'] = response.css('#content_slider_left_content_content > div:nth-child(2)::text').extract_first().split(': ')[-1]
         item['url'] = response.url
 
         yield item
-
-
