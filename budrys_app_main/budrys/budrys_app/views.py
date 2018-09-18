@@ -1,22 +1,34 @@
 from django.core.paginator import Paginator
 from django.template.response import TemplateResponse
 from django.views import View
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
 from budrys_app.models import Animals
+from budrys_app.serializers import AnimalsSerializer
 
 
-class AllAnimalsView(View):
+class AnimalsListView(ListCreateAPIView):
+    serializer_class = AnimalsSerializer
+    queryset = Animals.objects.all()
 
-    def get(self, request):
-        animals_list = Animals.objects.all()
-        paginator = Paginator(animals_list, 15)  # Show 25 contacts per page
 
-        page = request.GET.get('page')
-        allanimals = paginator.get_page(page)
+class AnimalsDetailView(RetrieveUpdateDestroyAPIView):
+    serializer_class = AnimalsSerializer
+    queryset = Animals.objects.all()
 
-        return TemplateResponse(request, 'animals_list_all.html', {
-            'animals_list': allanimals
-        })
+
+# class AllAnimalsView(View):
+#
+#     def get(self, request):
+#         animals_list = Animals.objects.all()
+#         paginator = Paginator(animals_list, 15)  # Show 25 contacts per page
+#
+#         page = request.GET.get('page')
+#         allanimals = paginator.get_page(page)
+#
+#         return TemplateResponse(request, 'animals_list_all.html', {
+#             'animals_list': allanimals
+#         })
 
 
 # class AnimalSearchView(View):
@@ -31,9 +43,9 @@ class AllAnimalsView(View):
 #         ctx = {'form': form}
 #         if form.is_valid():
 #             phrase = form.cleaned_data['phrase']
-#             students = Animals.objects.filter(last_name__icontains=phrase).order_by('last_name')
+#             animals = Animals.objects.filter(name__icontains=phrase).order_by('name')
 #             ctx.update({
-#                 'student_list': students,
+#                 'student_list': animals,
 #                 'phrase': phrase,
 #             })
 #         return TemplateResponse(request, 'animal_search.html', ctx)
