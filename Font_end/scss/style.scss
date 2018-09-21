@@ -57,6 +57,11 @@ $primary-overlay: rgba(50, 146, 166, 0.8);
     .card {
       min-height: 30rem;
 
+      .card-img-top {
+        height: 15rem;
+        object-fit: cover;
+      }
+
       #map-list {
         height: 30rem;
         width: 100%;

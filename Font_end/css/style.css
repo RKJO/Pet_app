@@ -32,6 +32,9 @@
 
 #animal-list .container .card {
   min-height: 30rem; }
+  #animal-list .container .card .card-img-top {
+    height: 15rem;
+    object-fit: cover; }
   #animal-list .container .card #map-list {
     height: 30rem;
     width: 100%; }
