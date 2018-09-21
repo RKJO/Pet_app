@@ -34,6 +34,7 @@ function initMapDetails() {
     options
   );
 }
+<<<<<<< Updated upstream
 // $(function() {
 
 //     var $animals_cards = $('#animal-cards');
@@ -67,3 +68,52 @@ function initMapDetails() {
 //         }
 
 //     });
+=======
+
+// Get animal list
+
+$(function() {
+  var $animals_cards = $("#animal-cards");
+  $.ajax({
+    url: "http://127.0.0.1:8000/animals/",
+    method: "GET"
+  }).done(function(response) {
+    for (var i = 0; i < response.length; i++) {
+      var $card = $('<div class="card">');
+      var $img = $(
+        '<img src="' +
+          response[i].img_main +
+          '" alt="' +
+          response[i].img_main_alt +
+          '" class="img-fluid card-im g-top">'
+      );
+      var $card_body = $('<div class="card-body">');
+      var $title = $('<h4 class="card-title"></h4>');
+      $title.text(response[i].name);
+      var $race = $('<small class="text-muted"></small><hr>');
+      $race.text(response[i].race);
+      var $sex = $('<p class="card-text"</p>');
+      $sex.text(response[i].sex);
+      var $age = $('<p class="card-text"</p>');
+      $age.text(response[i].age);
+      var $weight = $('<p class="card-text"</p>');
+      $weight.text(response[i].weight);
+      var $button = $(
+        '<a class="btn btn-outline-primary btn-block" href="/animals/' +
+          response[i].id +
+          ">Więcej szczegółów</a>"
+      );
+
+      $animals_cards.append($card);
+      $card.append($img);
+      $card_body.append($title);
+      $race.insertAfter($title);
+      $sex.insertAfter($race);
+      $age.insertAfter($sex);
+      $weight.insertAfter($age);
+      $button.insertAfter($weight);
+      $card_body.isertAfter($img);
+    }
+  });
+});
+>>>>>>> Stashed changes
