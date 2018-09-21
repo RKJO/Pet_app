@@ -5,7 +5,8 @@ from rest_framework import serializers
 class AnimalsSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Animals
-        fields = ("name",
+        fields = ("id",
+                  "name",
                   "species",
                   "race",
                   "sex",
