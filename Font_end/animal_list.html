@@ -15,11 +15,7 @@
 <body id="animal-list" data-spy="scroll" data-target="#main-nav">
   <header>
 
-<<<<<<< Updated upstream
-    <!-- SHOWCASE -->
-=======
     <!-- SEARCH FORM & MAP-->
->>>>>>> Stashed changes
     <section id="search_form" class="py-3">
       <div class="container">
         <div class="row">
@@ -154,59 +150,9 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <div id="animal-cards" class="card-columns">
-            <!-- card -->
-            <div class="card">
-              <img src="{{animal.img_main}}" alt="" class="img-fluid card-im    g-top">
-              <div class="card-body">
-                <h4 class="card-title">{{animal.name}}</h4>
-                <hr>
-                <small class="text-muted">{{animal.race}}</small>
-                <p class="card-text">{{animal.sex}}</p>
-                <p class="card-text">{{animal.sex}}</p>
-                <p class="card-text">{{animal.weight}}</p>
-                <a class="btn btn-outline-primary btn-block" href="/animals/{{ animal.id }}">Więcej szczegółów</a>
-              </div>
-            </div>
+          <div id="animal-cards" class="card-deck">
+            <!-- Cards from jQuery  -->
 
-            <div class="card">
-              <img src="{{animal.img_main}}" alt="" class="img-fluid card-im    g-top">
-              <div class="card-body">
-                <h4 class="card-title">{{animal.name}}</h4>
-                <hr>
-                <small class="text-muted">{{animal.race}}</small>
-                <p class="card-text">{{animal.sex}}</p>
-                <p class="card-text">{{animal.sex}}</p>
-                <p class="card-text">{{animal.weight}}</p>
-                <a class="btn btn-outline-primary btn-block" href="/animals/{{ animal.id }}">Więcej szczegółów</a>
-              </div>
-            </div>
-
-            <div class="card">
-              <img src="{{animal.img_main}}" alt="" class="img-fluid card-im    g-top">
-              <div class="card-body">
-                <h4 class="card-title">{{animal.name}}</h4>
-                <hr>
-                <small class="text-muted">{{animal.race}}</small>
-                <p class="card-text">{{animal.sex}}</p>
-                <p class="card-text">{{animal.sex}}</p>
-                <p class="card-text">{{animal.weight}}</p>
-                <a class="btn btn-outline-primary btn-block" href="/animals/{{ animal.id }}">Więcej szczegółów</a>
-              </div>
-            </div>
-
-            <div class="card">
-              <img src="{{animal.img_main}}" alt="" class="img-fluid card-im    g-top">
-              <div class="card-body">
-                <h4 class="card-title">{{animal.name}}</h4>
-                <hr>
-                <small class="text-muted">{{animal.race}}</small>
-                <p class="card-text">{{animal.sex}}</p>
-                <p class="card-text">{{animal.sex}}</p>
-                <p class="card-text">{{animal.weight}}</p>
-                <a class="btn btn-outline-primary btn-block" href="/animals/{{ animal.id }}">Więcej szczegółów</a>
-              </div>
-            </div>
 
           </div>
         </div>
@@ -214,7 +160,16 @@
     </div>
   </section>
 
-  <!-- <div id="test" style="margin-top:1500px;"></div> -->
+
+  <!-- Pagination-->
+  <nav>
+    <ul id="animal-list-pagination" class="pagination pagination-sm justify-content-center">
+      <!-- Paginatin buttons from jQuery -->
+
+    </ul>
+  </nav>
+
+
   <script src="js/scripts.js"></script>
   <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>

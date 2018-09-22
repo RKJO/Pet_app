@@ -12,7 +12,7 @@ function initMap() {
   var map = new google.maps.Map(document.getElementById("map"), options);
 }
 
-// animallist
+// Animal list Map
 function initMapList() {
   var options = {
     zoom: 8,
@@ -81,15 +81,18 @@ $(function() {
       $card_body.insertAfter($img);
     }
 
-    var $page_item = $();
     var $previous = $(
-      '<li class="page-item"><a class="page-link" href="#"><span>&laquo;</span><span class="sr-only">Previous</span></a>'
+      '<li class="page-item"><a class="page-link" href="#"><span>&laquo;</span><span class="sr-only">Previous</span></a></li>'
     );
     $previous.attr("href", response.previous);
+
     var $next = $(
       '<li class="page-item"><a class="page-link" href="#"><span>&raquo;</span><span class="sr-only">Next</span></a></li>'
     );
     $next.attr("href", response.next);
+
+    $listpagination.append($previous);
+    $listpagination.append($next);
 
     // <li class="page-item disabled">
     //         <a class="page-link" href="#">
