@@ -44,29 +44,31 @@ $(function() {
     url: "http://127.0.0.1:8000/animals/",
     method: "GET"
   }).done(function(response) {
-    for (var i = 0; i < 15; i++) {
+    var $result = response["results"];
+
+    for (var i = 0; i < $result.length; i++) {
       var $card = $('<div class="card">');
       var $img = $(
         '<img src="' +
-          response[i].img_main +
+          $result[i].img_main +
           '" alt="' +
-          response[i].img_main_alt +
+          $result[i].img_main_alt +
           '" class="img-fluid card-img-top">'
       );
       var $card_body = $('<div class="card-body">');
       var $title = $('<h4 class="card-title"></h4>');
-      $title.text(response[i].name);
+      $title.text($result[i].name);
       var $race = $('<small class="text-muted"></small>');
-      $race.text(response[i].race);
+      $race.text($result[i].race);
       var $hr = $("<hr>");
       var $sex = $('<p class="card-text"></p>');
-      $sex.text("Płeć: " + response[i].sex);
+      $sex.text("Płeć: " + $result[i].sex);
       var $age = $('<p class="card-text"></p>');
-      $age.text("wiek: " + response[i].age);
+      $age.text("wiek: " + $result[i].age);
       var $weight = $('<p class="card-text"></p>');
-      $weight.text("Wielkość: " + response[i].weight);
+      $weight.text("Wielkość: " + $result[i].weight);
       var $button = $('<a class="btn btn-outline-primary btn-block" href=#>');
-      $button.attr("href", "/animals/" + response[i].id);
+      $button.attr("href", "/animals/" + $result[i].id);
       $button.text("Więcej szczegółów");
 
       $animals_cards.append($card);
