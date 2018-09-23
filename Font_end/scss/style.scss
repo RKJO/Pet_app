@@ -97,9 +97,22 @@ $primary-overlay: rgba(50, 146, 166, 0.8);
   }
 }
 
+@media (max-width: 1200px) {
+  #animal-list {
+    .card-columns {
+      column-count: 3;
+    }
+  }
+}
+
 @media (max-width: 991px) {
   .mb-resp {
     margin-bottom: 1rem;
+  }
+  #animal-list {
+    .card-columns {
+      column-count: 2;
+    }
   }
 }
 
@@ -118,4 +131,13 @@ $primary-overlay: rgba(50, 146, 166, 0.8);
       min-height: 250px;
     }
   }
+
+  #animal-list {
+    .card-columns {
+      column-count: 1;
+    }
+  }
+}
+
+@media (max-width: 576px) {
 }

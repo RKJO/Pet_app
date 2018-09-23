@@ -3451,7 +3451,7 @@ input[type="button"].btn-block {
   margin-bottom: 0.75rem; }
 @media (min-width: 576px) {
   .card-columns {
-    column-count: 3;
+    column-count: 4;
     column-gap: 1.25rem;
     orphans: 1;
     widows: 1; }

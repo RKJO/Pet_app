@@ -52,9 +52,15 @@
     height: 20rem;
     width: 100%; }
 
+@media (max-width: 1200px) {
+  #animal-list .card-columns {
+    column-count: 3; } }
 @media (max-width: 991px) {
   .mb-resp {
-    margin-bottom: 1rem; } }
+    margin-bottom: 1rem; }
+
+  #animal-list .card-columns {
+    column-count: 2; } }
 @media (max-width: 768px) {
   #showcase {
     min-height: 250px; }
@@ -64,4 +70,7 @@
     #showcase p {
       font-size: 1rem; }
     #showcase .row {
-      min-height: 250px; } }
+      min-height: 250px; }
+
+  #animal-list .card-columns {
+    column-count: 1; } }
