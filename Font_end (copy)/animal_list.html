@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="jquery/jquery-3.3.1.js"></script>
+
+  <title>Budrys_app</title>
+</head>
+
+<body id="animal-list" data-spy="scroll" data-target="#main-nav">
+  <header>
+
+    <!-- SEARCH FORM & MAP-->
+    <section id="search_form" class="py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card border-primary mb-resp">
+              <div class="card-header mt-3 mx-3 p-3 h4">
+                Wyszukaj zwierzeta
+              </div>
+
+              <div class="card-body">
+                <form>
+
+                  <div class="m-1">Gatunek:</div>
+                  <div id="radio-form" class="d-flex justify-content-around my-3">
+
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="species" id="dog" value="dog">
+                      <label class="form-check-label" for="dog">Pies</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="species" id="cat" value="cat">
+                      <label class="form-check-label" for="cat">Kot</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="species" id="other" value="other">
+                      <label class="form-check-label" for="inlineRadio3">Inne</label>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6 mb-2">
+                      <label for="age_from">Wiek od:</label>
+                      <input type="text" class="form-control" id="age_from" placeholder="" value="" required="">
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+                      <label for="age_to">Wiek do:</label>
+                      <input type="text" class="form-control" id="age_to" placeholder="" value="" required="">
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6 mb-2">
+                      <label for="sex">Płeć</label>
+                      <select class="custom-select d-block w-100" id="sex" required="">
+                        <option value="">Wybierz</option>
+                        <option>Samica</option>
+                        <option>Samiec</option>
+                      </select>
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+                      <label for="sex">Wielkość</label>
+                      <select class="custom-select d-block w-100" id="sex" required="">
+                        <option value="">Wybierz</option>
+                        <option>Mały</option>
+                        <option>Średni</option>
+                        <option>Duży</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-8 mb-2">
+                      <label for="address">Adres</label>
+                      <input type="text" class="form-control" id="address" placeholder="Marszałkowska 100, 00-026 Warszawa"
+                        required="">
+                    </div>
+
+                    <div class="col-md-4 mb-2">
+                      <label for="distance">Odległość</label>
+                      <select class="custom-select d-block w-100" id="distance">
+                        <option value="">Wybierz</option>
+                        <option value="10">do 10 km</option>
+                        <option value="20">do 20 km</option>
+                        <option value="30">do 30 km</option>
+                        <option value="40">do 40 km</option>
+                        <option value="50">do 50 km</option>
+                        <option value="10">do 60 km</option>
+                        <option value="10">do 70 km</option>
+                        <option value="10">do 80 km</option>
+                        <option value="10">do 90 km</option>
+                        <option value="10">do 100 km</option>
+                      </select>
+                    </div>
+                  </div>
+                  <button class="btn btn-primary btn-block" type="submit">Szukaj</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card border-primary">
+              <div class="card-body p-0">
+                <div id="map-list"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </header>
+
+
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-md navbar-light sticky-top py-2" id="main-nav">
+    <div class="container">
+      <a href="#home" class="navbar-brand">
+        <img src="img/logo.png" width="50" alt="">
+        <h4 class="d-inline align-middle">Budrys App</h4>
+      </a>
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a href="#home" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#about" class="nav-link">Wyszukaj</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- Animals Cards -->
+  <section id="animals" class="py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div id="animal-cards" class="card-columns">
+            <!-- Cards from jQuery  -->
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Pagination-->
+  <nav>
+    <ul id="animal-list-pagination" class="pagination pagination-sm justify-content-center">
+      <!-- Paginatin buttons from jQuery -->
+
+    </ul>
+  </nav>
+
+
+  <script src="js/scripts.js"></script>
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_grQnCvjoPq5sAzIl1ih7IA28tvLf4Qc&callback=initMapList"></script>
+</body>
+
+</html>
