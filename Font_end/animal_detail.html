@@ -9,6 +9,9 @@
     crossorigin="anonymous">
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/style.css">
+  <script src="jquery/jquery-3.3.1.js"></script>
+  <script src="jquery/jquery-3.3.1.js"></script>
+
   <title>Budrys_app</title>
 </head>
 
@@ -44,9 +47,9 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-6">
-          <div class="card-1 card border-primary mb-resp">
+          <div id="animal-details-card" class="card-1 card border-primary mb-resp">
 
-            <div class="card-header mt-3 mx-3 p-3 h4">
+            <!-- <div class="card-header mt-3 mx-3 p-3 h4">
               "name": "Tosia"
             </div>
 
@@ -72,7 +75,7 @@
                 obcaecati iusto praesentium optio consequatur doloremque amet neque enim tempore maiores qui, ea ab,
                 modi officiis suscipit, a excepturi. .</p>
 
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="col-lg-6">
@@ -81,7 +84,8 @@
 
             <!-- SLIDER WITH CONTROLS -->
             <div id="img-carousel" class="carousel slide " data-ride="carousel">
-              <div class="carousel-inner">
+              <div id="animal_images" class="carousel-inner">
+
                 <div class="carousel-item active">
                   <img class="d-block img-fluid" src="https://source.unsplash.com/wgq4eit198Q/700x400" alt="First Slide">
                 </div>
