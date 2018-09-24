@@ -40,7 +40,6 @@ function initMapDetails() {
 $(document).ready(function() {
   var $animals_cards = $("#animal-cards");
   var $listpagination = $("#animal-list-pagination");
-  var $animal_details = $("#animal-details-card");
 
   $.ajax({
     url: "http://127.0.0.1:8000/animals/",
@@ -125,72 +124,106 @@ $(document).ready(function() {
     // </li>
   });
 
-  // Animal details
-  $animals_cards.find(".details").on("click", function(event) {
-    var $id = $(this).data("id");
-    $.ajax({
-      url: "http://127.0.0.1:8000/animals/" + $id,
-      method: "GET"
-    }).done(function(response) {
-      // Description Card
+  // // Animal details
+  // $animals_cards.find(".details").on("click", function(event) {
+  //   var $id = $(this).data("id");
+  $.ajax({
+    url: "http://127.0.0.1:8000/animals/717/",
+    method: "GET"
+  }).done(function(response) {
+    // Description Card
+    var $animal_details = $("#animal-details-card");
 
-      var $name = $('<div class="card-header mt-3 mx-3 p-3 h4"></div>');
-      $name.text(response.name);
+    var $name = $('<div class="card-header mt-3 mx-3 p-3 h4"></div>');
+    $name.text(response.name);
 
-      var $card_body = $('<div class="card-body">');
-      var $title_species = $(
-        '<span class="card-title font-weight-bold">Gatunek: </span>'
-      );
-      var $species = $('<p class="card-text ml-4 mb-2"></p>');
-      $species.text(response.species);
-      var $title_race = $(
-        '<span class="card-title font-weight-bold">Rasa: </span>'
-      );
-      var $race = $('<p class="card-text ml-4 mb-2"></p>');
-      $race.text(response.race);
-      var $title_sex = $(
-        '<span class="card-title font-weight-bold">Płeć: </span>'
-      );
-      var $sex = $('<p class="card-text ml-4 mb-2"></p>');
-      $sex.text(response.sex);
-      var $title_age = $(
-        '<span class="card-title font-weight-bold">Wiek: </span>'
-      );
-      var $age = $('<p class="card-text ml-4 mb-2"></p>');
-      $age.text(response.age);
-      var $title_weight = $(
-        '<span class="card-title font-weight-bold">Waga: </span>'
-      );
-      var $weight = $('<p class="card-text ml-4 mb-2"></p>');
-      $weight.text(response.weight);
-      var $title_sterilized_castrated = $(
-        '<span class="card-title font-weight-bold">Wysterylizowana/Wykastrowany: </span>'
-      );
-      var $sterilized_castrated = $('<p class="card-text ml-4 mb-2"></p>');
-      $sterilized_castrated.text(response.sterilized_castrated);
-      var $title_description = $(
-        '<span class="card-title font-weight-bold">Opis: </span>'
-      );
-      var $description = $('<p class="card-text text-justify"></p>');
-      $description.text(response.description);
+    var $card_body = $('<div class="card-body">');
+    var $title_species = $(
+      '<span class="card-title font-weight-bold">Gatunek: </span>'
+    );
+    var $species = $('<p class="card-text ml-4 mb-2"></p>');
+    $species.text(response.species);
+    var $title_race = $(
+      '<span class="card-title font-weight-bold">Rasa: </span>'
+    );
+    var $race = $('<p class="card-text ml-4 mb-2"></p>');
+    $race.text(response.race);
+    var $title_sex = $(
+      '<span class="card-title font-weight-bold">Płeć: </span>'
+    );
+    var $sex = $('<p class="card-text ml-4 mb-2"></p>');
+    $sex.text(response.sex);
+    var $title_age = $(
+      '<span class="card-title font-weight-bold">Wiek: </span>'
+    );
+    var $age = $('<p class="card-text ml-4 mb-2"></p>');
+    $age.text(response.age);
+    var $title_weight = $(
+      '<span class="card-title font-weight-bold">Waga: </span>'
+    );
+    var $weight = $('<p class="card-text ml-4 mb-2"></p>');
+    $weight.text(response.weight);
+    var $title_sterilized_castrated = $(
+      '<span class="card-title font-weight-bold">Wysterylizowana/Wykastrowany: </span>'
+    );
+    var $sterilized_castrated = $('<p class="card-text ml-4 mb-2"></p>');
+    $sterilized_castrated.text(response.sterilized_castrated);
+    var $title_description = $(
+      '<span class="card-title font-weight-bold">Opis: </span>'
+    );
+    var $description = $('<p class="card-text text-justify"></p>');
+    $description.text(response.description);
 
-      $card_body.append($title_species);
-      $species.insertAfter($title_species);
-      $title_race.insertAfter($species);
-      $race.insertAfter($title_race);
-      $title_sex.insertAfter($race);
-      $sex.insertAfter($title_sex);
-      $title_age.insertAfter($sex);
-      $age.insertAfter($title_age);
-      $title_weight.insertAfter($age);
-      $weight.insertAfter($title_weight);
-      $title_sterilized_castrated.insertAfter($weight);
-      $sterilized_castrated.insertAfter($title_sterilized_castrated);
-      $title_description.insertAfter(sterilized_castrated);
-      $description.insertAfter($title_description);
+    $card_body.append($title_species);
+    $species.insertAfter($title_species);
+    $title_race.insertAfter($species);
+    $race.insertAfter($title_race);
+    $title_sex.insertAfter($race);
+    $sex.insertAfter($title_sex);
+    $title_age.insertAfter($sex);
+    $age.insertAfter($title_age);
+    $title_weight.insertAfter($age);
+    $weight.insertAfter($title_weight);
+    $title_sterilized_castrated.insertAfter($weight);
+    $sterilized_castrated.insertAfter($title_sterilized_castrated);
+    $title_description.insertAfter($sterilized_castrated);
+    $description.insertAfter($title_description);
 
-      $animal_details.append($name);
-      $card_body.insertAfter($name);
-    });
+    $animal_details.append($name);
+    $card_body.insertAfter($name);
+
+    // Aniaml images
+    // "image": "http://127.0.0.1:8000/media/img/None/no-img.jpg",
+    // "img_main": "http://www.napaluchu.waw.pl/files/animals_napaluchu/big/180917140617.JPG",
+    // "img_main_alt": "http://www.napaluchu.waw.pl/files/animals_napaluchu/thumbs4/180917140617.JPG",
+    // "img_s": "['http://www.napaluchu.waw.pl/files/animals_napaluchu/big/180917140621.JPG', 'http://www.napaluchu.waw.pl/files/animals_napaluchu/big/180917140625.JPG', 'http://www.napaluchu.waw.pl/files/animals_napaluchu/big/180917140629.JPG']",
+
+    var $animal_images = $("#animal_images");
+    var $carousel_item_img_main = $('<div class="carousel-item active">');
+    var $animal_img_main = $('<img class="d-block img-fluid" src="" alt="">');
+
+    if (response.img_main != "") {
+      $animal_img_main.attr("src", response.img_main);
+      $animal_img_main.attr("alt", response.img_main_alt);
+      $carousel_item_img_main.append($animal_img_main);
+    } else {
+      $animal_img_main.attr("src", response.image);
+      $carousel_item_img_main.append($animal_img_main);
+    }
+
+    $animal_images.append($carousel_item_img_main);
+
+    // this is working - the img_s in not a list but a str.
+
+    // if (response.img_s != "") {
+    //   for (var i = 0; i < response.img_s.length; i++) {
+    //     var $carousel_item_img_s = $('<div class="carousel-item">');
+    //     var $animal_img_s = $('<img class="d-block img-fluid" src="" alt="">');
+    //     $animal_img_s.attr("src", response.img_s[i]);
+    //     $carousel_item_img_s.append($animal_img_s);
+    //     $animal_images.append($carousel_item_img_s);
+    //   }
+    // }
   });
+  // });
 });
