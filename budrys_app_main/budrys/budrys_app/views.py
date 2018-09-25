@@ -12,9 +12,33 @@ class AnimalsListView(ListCreateAPIView):
     queryset = Animals.objects.all()
 
 
-class AnimalsDetailView(RetrieveUpdateDestroyAPIView):
-    serializer_class = AnimalsSerializer
-    queryset = Animals.objects.all()
+# class AnimalsDetailView(RetrieveUpdateDestroyAPIView):
+#     serializer_class = AnimalsSerializer
+#     queryset = Animals.objects.all()
+
+
+class AnimalsDetailView(View):
+
+    def get(self, request, pk):
+        animal = Animals.objects.get(pk=pk)
+        ctx = {
+            "animal": animal,
+            # "animal_name": animal.name,
+            # "animal_species": animal.species,
+            # "animal_race": animal.race,
+            # "animal_sex": animal.sex,
+            # "animal_age": animal.age,
+            # "animal_weight": animal.weight,
+            # "animal_sterilized_castrated": animal.sterilized_castrated,
+            # "animal_description": animal.description,
+            # "animal_image": animal.image,
+            # "animal_img_main": animal.img_main,
+            # "animal_img_main_alt": animal.img_main_alt,
+            # "animal_img_s": animal.img_s,
+            # "animal_url": animal.url,
+             }
+
+        return TemplateResponse(request, "animal_details.html", ctx)
 
 
 # class AllAnimalsView(View):
