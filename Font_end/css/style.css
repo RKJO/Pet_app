@@ -40,18 +40,18 @@
     width: 100%; }
 
 #animal-details .card-1 {
-  min-height: 41.2rem;
+  min-height: 49.3rem;
   font-size: 0.9rem;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif; }
 #animal-details .card-2 #img-carousel .carousel-item {
-  height: 20rem; }
+  height: 24rem; }
 #animal-details .card-2 #img-carousel .carousel-item img {
   height: 100%;
   width: 100%; }
 #animal-details .card-3 {
-  min-height: 20rem; }
+  min-height: 24rem; }
   #animal-details .card-3 #map-details {
-    height: 20rem;
+    height: 24rem;
     width: 100%; }
 
 @media (max-width: 1200px) {

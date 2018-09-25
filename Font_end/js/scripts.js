@@ -35,7 +35,7 @@ function initMapDetails() {
   );
 }
 
-// Get animal list
+// Animal list Page
 
 $(document).ready(function() {
   var $animals_cards = $("#animal-cards");
@@ -124,7 +124,7 @@ $(document).ready(function() {
     // </li>
   });
 
-  // // Animal details
+  // // Animal details Page
   // $animals_cards.find(".details").on("click", function(event) {
   //   var $id = $(this).data("id");
   $.ajax({
@@ -192,7 +192,7 @@ $(document).ready(function() {
     $animal_details.append($name);
     $card_body.insertAfter($name);
 
-    // Aniaml images
+    // Aniamal images card
     // "image": "http://127.0.0.1:8000/media/img/None/no-img.jpg",
     // "img_main": "http://www.napaluchu.waw.pl/files/animals_napaluchu/big/180917140617.JPG",
     // "img_main_alt": "http://www.napaluchu.waw.pl/files/animals_napaluchu/thumbs4/180917140617.JPG",
@@ -224,6 +224,22 @@ $(document).ready(function() {
     //     $animal_images.append($carousel_item_img_s);
     //   }
     // }
+
+    // Animal Map Card
+
+    // Datail Buttons
+    var $detail_buttons = $("#detail-buttons");
+
+    if (response.url != "") {
+      var $col = $('<div class="col-lg-3 col-sm-6">');
+      var $detail_button = $(
+        '<a class="btn btn-success btn-sm" href="" target="blank"></a>'
+      );
+      $detail_button.text("Przejdż do strony schroniska");
+      $detail_button.attr("href", response.url);
+      $col.append($detail_button);
+      $detail_buttons.append($col);
+    }
   });
   // });
 });
