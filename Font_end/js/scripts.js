@@ -41,6 +41,35 @@ $(document).ready(function() {
   var $animals_cards = $("#animal-cards");
   var $listpagination = $("#animal-list-pagination");
 
+  // Search form
+  var $search_form = $('#search-form-list');
+  var $submit_btn = $('#submit');
+  $submit_btn.on('click', function(event) {
+      event.preventDefault();
+
+      var formData = {
+          species_dog: $search_form.find('#dog').val(),
+          species_cat: $search_form.find('#cat').val(),
+          species_other: $search_form.find('#other').val(),
+          age_from: $form.find('#age_from').val(),
+          age_to: $form.find('#age_to').val(),
+          sex: $form.find('#sex').val(),
+          weight: $form.find('#weight').val(),
+          address: $form.find('#address').val(),
+          distance: $form.find('#distance').val(),
+      };
+
+      $.ajax({
+        url: 'http://127.0.0.1:8000/animals/',
+        method: 'POST',
+        data: formData,
+        dataType: 'json'
+      }).done(function(response) {
+        // ?????
+        location.reload();           //przeładowanie strony
+
+    })
+
   $.ajax({
     url: "http://127.0.0.1:8000/animals/",
     method: "GET"
