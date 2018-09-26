@@ -73,7 +73,10 @@ $(document).ready(function() {
           $result[i].id +
           '" href="">'
       );
-      $button.attr("href", "animal_detail.html");
+      $button.attr(
+        "href",
+        "http://127.0.0.1:8000/animals/" + $result[i].id + "/"
+      );
       $button.text("Więcej szczegółów");
 
       $animals_cards.append($card);
