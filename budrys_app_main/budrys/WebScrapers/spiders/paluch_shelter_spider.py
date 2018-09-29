@@ -23,10 +23,10 @@ class PaluchShelterSpider(scrapy.Spider):
         if next_group_pages is not None:
             yield response.follow(next_group_pages, callback=self.next_page)
 
-    def parse_year(self, age):
-        today = datetime.date.today()
-        years = today.year - int(age)
-        return years
+    # def parse_year(self, age):
+    #     today = datetime.date.today()
+    #     years = today.year - int(age)
+    #     return years
 
     def pars_administration_date(self, date_str):
         date = date_str.split(".")
@@ -40,9 +40,9 @@ class PaluchShelterSpider(scrapy.Spider):
         item['species'] = response.css('.info').css('span::text').extract()[0].split(':')[-1].strip()
         item['race'] = response.css('.info').css('span::text').extract()[1].split(':')[-1].strip()
         item['sex'] = response.css('.info').css('span::text').extract()[2].split(':')[-1].strip()
-        # item['age'] = self.parse_year(response.css('.info').css('span::text').extract()[3].split(' ')[-2])
+        item['age'] = response.css('.info').css('span::text').extract()[3].split(' ')[-2]
         item['weight'] = int(response.css('.info').css('span::text').extract()[4].split(' ')[1])
-        # item['admission_date'] = self.pars_administration_date(response.css('.info').css('span::text').extract()[5].split(' ')[-1])
+        item['admission_date'] = self.pars_administration_date(response.css('.info').css('span::text').extract()[5].split(' ')[-1])
         item['evidence_number'] = response.css('.info').css('span::text').extract()[6].split(' ')[-1]
         item['description'] = ' '.join(' '.join(response.css('.description::text').extract()).split())
         item['img_main'] = response.urljoin(response.css('#main_image_cont a::attr(href)').extract_first())

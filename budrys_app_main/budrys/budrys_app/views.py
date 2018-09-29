@@ -10,6 +10,8 @@ from budrys_app.serializers import AnimalsSerializer
 class AnimalsListView(ListCreateAPIView):
     serializer_class = AnimalsSerializer
     queryset = Animals.objects.all()
+    # filter_backend =
+
 
 
 # class AnimalsDetailView(RetrieveUpdateDestroyAPIView):
