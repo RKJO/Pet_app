@@ -22,3 +22,12 @@ class Animals(models.Model):
     url = models.URLField()
     evidence_number = models.CharField(max_length=120, null=True)
     admission_date = models.DateField(default=date.today)
+
+
+# class Location(models.Model):
+#     name = models.CharField(max_length=64, null=True)
+#     description = models.TextField()
+#     location = models.CharField(max_length=120)
+#     latitude = models.FloatField()
+#     longitude = models.FloatField()
+#     animal = models.ForeignKey(Animals, on_delete=models.CASCADE)
