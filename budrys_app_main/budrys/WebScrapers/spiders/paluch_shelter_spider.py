@@ -23,11 +23,6 @@ class PaluchShelterSpider(scrapy.Spider):
         if next_group_pages is not None:
             yield response.follow(next_group_pages, callback=self.next_page)
 
-    # def parse_year(self, age):
-    #     today = datetime.date.today()
-    #     years = today.year - int(age)
-    #     return years
-
     def pars_administration_date(self, date_str):
         date = date_str.split(".")
         date_time = datetime.datetime(year=int(date[-1]), month=int(date[1]), day=int(date[0]))

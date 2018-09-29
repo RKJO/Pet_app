@@ -43,6 +43,25 @@ $(document).ready(function() {
 
   // Animal cards function
 
+  function polishPlural(
+    singularNominativ,
+    pluralNominativ,
+    pluralGenitive,
+    value
+  ) {
+    if (value === 1) {
+      return singularNominativ;
+    } else if (
+      value % 10 >= 2 &&
+      value % 10 <= 4 &&
+      (value % 100 < 10 || value % 100 >= 20)
+    ) {
+      return pluralNominativ;
+    } else {
+      return pluralGenitive;
+    }
+  }
+
   function getAnimalCards(response) {
     var $result = response["results"];
 
@@ -67,7 +86,11 @@ $(document).ready(function() {
       var $sex = $('<p class="card-text"></p>');
       $sex.text("Płeć: " + $result[i].sex);
       var $age = $('<p class="card-text"></p>');
-      $age.text("Wiek: " + $result[i].age);
+      $age.text(
+        "Wiek: " +
+          $result[i].age +
+          polishPlural(" rok", " lata", " lat", $result[i].age)
+      );
       var $weight = $('<p class="card-text"></p>');
       $weight.text("Wielkość: " + $result[i].weight);
       var $button = $(
@@ -208,9 +231,7 @@ $(document).ready(function() {
 
     $.ajax({
       url: url,
-      method: "GET",
-      // data: formData,
-      dataType: "json"
+      method: "GET"
     }).done(getAnimalCards);
   });
 });

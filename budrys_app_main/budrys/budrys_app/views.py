@@ -27,6 +27,7 @@ class AnimalsListView(ListCreateAPIView):
 #     serializer_class = AnimalsSerializer
 #     queryset = Animals.objects.all()
 
+
 class AnimalsDetailView(View):
 
     def get(self, request, pk):
