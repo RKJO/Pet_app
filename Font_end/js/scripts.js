@@ -41,42 +41,9 @@ $(document).ready(function() {
   var $animals_cards = $("#animal-cards");
   var $listpagination = $("#animal-list-pagination");
 
-  // Search form
-  var $search_form = $("#search-form-list");
-  var $submit_btn = $("#submit");
-  $submit_btn.on("click", function(event) {
-    event.preventDefault();
+  // Animal cards function
 
-    var formData = {
-      species_dog: $search_form.find("#dog").val(),
-      species_cat: $search_form.find("#cat").val(),
-      species_other: $search_form.find("#other").val(),
-      age_from: $form.find("#age_from").val(),
-      age_to: $form.find("#age_to").val(),
-      sex: $form.find("#sex").val(),
-      weight: $form.find("#weight").val(),
-      address: $form.find("#address").val(),
-      distance: $form.find("#distance").val()
-    };
-    console.log(formData);
-
-    url = "";
-
-    $.ajax({
-      url: "http://127.0.0.1:8000/animals/?species=dog&",
-      method: "GET",
-      data: formData,
-      dataType: "json"
-    }).done(function(response) {
-      // ?????
-      location.reload(); //przeładowanie strony
-    });
-  });
-
-  $.ajax({
-    url: "http://127.0.0.1:8000/animals/",
-    method: "GET"
-  }).done(function(response) {
+  function getAnimalCards(response) {
     var $result = response["results"];
 
     for (var i = 0; i < $result.length; i++) {
@@ -100,7 +67,7 @@ $(document).ready(function() {
       var $sex = $('<p class="card-text"></p>');
       $sex.text("Płeć: " + $result[i].sex);
       var $age = $('<p class="card-text"></p>');
-      $age.text("wiek: " + $result[i].age);
+      $age.text("Wiek: " + $result[i].age);
       var $weight = $('<p class="card-text"></p>');
       $weight.text("Wielkość: " + $result[i].weight);
       var $button = $(
@@ -126,158 +93,124 @@ $(document).ready(function() {
       $card_body.insertAfter($img);
     }
 
-    // var $previous = $(
-    //   '<li class="page-item"><a class="page-link" href="#"><span>&laquo;</span><span class="sr-only">Previous</span></a></li>'
-    // );
-    // $previous.attr("href", response.previous);
+    var $previous = $(
+      '<li id="class="page-item disabled"><a class="page-link" data-url=' +
+        response.previous +
+        'href="#"><span>&laquo;</span><span class="sr-only">Previous</span></a></li>'
+    );
 
-    // var $next = $(
-    //   '<li class="page-item"><a class="page-link" href="#"><span>&raquo;</span><span class="sr-only">Next</span></a></li>'
-    // );
-    // $next.attr("href", response.next);
+    var $next = $(
+      '<li class="page-item disabled"><a class="page-link" data-url=' +
+        response.next +
+        ' href="#"><span>&raquo;</span><span class="sr-only">Next</span></a></li>'
+    );
 
-    // $listpagination.append($previous);
-    // $listpagination.append($next);
+    $listpagination.append($previous);
+    $listpagination.append($next);
 
-    // <li class="page-item disabled">
-    //         <a class="page-link" href="#">
-    //             <span>&laquo;</span>
-    //             <span class="sr-only">Previous</span>
-    //         </a>
-    //     </li>
-    //     <li class="page-item active">
-    //         <a class="page-link" href="#">1</a>
-    //     </li>
-    //     <li class="page-item">
-    //         <a class="page-link" href="#">2</a>
-    //     </li>
-    //     <li class="page-item">
-    //         <a class="page-link" href="#">3</a>
-    //     </li>
-    // <li class="page-item">
-    //     <a class="page-link" href="#">
-    //         <span>&raquo;</span>
-    //         <span class="sr-only">Next</span>
-    //     </a>
-    // </li>
-  });
+    if (response.previous != null) {
+      $previous.toggleClass("disabled");
+    }
 
-  // // Animal details Page
-  // $animals_cards.find(".details").on("click", function(event) {
-  //   var $id = $(this).data("id");
+    if (response.next != null) {
+      $next.toggleClass("disabled");
+    }
+
+    $previous.on("click", function(event) {
+      event.preventDefault();
+      $animals_cards.find(".card").remove();
+      $listpagination.find(".page-item").remove();
+
+      $previous_url = $(this)
+        .find("a")
+        .data("url");
+      console.log($previous_url);
+
+      $.ajax({
+        url: $previous_url,
+        method: "GET"
+      }).done(getAnimalCards);
+    });
+
+    $next.on("click", function(event) {
+      event.preventDefault();
+      $animals_cards.find(".card").remove();
+      $listpagination.find("li").remove();
+
+      $next_url = $(this)
+        .find("a")
+        .data("url");
+      console.log($next_url);
+
+      $.ajax({
+        url: $next_url,
+        method: "GET"
+      }).done(getAnimalCards);
+    });
+  }
+
+  // Animal filters Funaction
+
+  // all Animals
   $.ajax({
-    url: "http://127.0.0.1:8000/animals/717/",
+    url: "http://127.0.0.1:8000/animals/",
     method: "GET"
-  }).done(function(response) {
-    // Description Card
-    var $animal_details = $("#animal-details-card");
+  }).done(getAnimalCards);
 
-    var $name = $('<div class="card-header mt-3 mx-3 p-3 h4"></div>');
-    $name.text(response.name);
+  // Search form
+  var $search_form = $("#search-form-list");
+  var $submit_btn = $("#submit");
+  $submit_btn.on("click", function(event) {
+    event.preventDefault();
+    $animals_cards.find(".card").remove();
+    $listpagination.find(".page-item").remove();
 
-    var $card_body = $('<div class="card-body">');
-    var $title_species = $(
-      '<span class="card-title font-weight-bold">Gatunek: </span>'
-    );
-    var $species = $('<p class="card-text ml-4 mb-2"></p>');
-    $species.text(response.species);
-    var $title_race = $(
-      '<span class="card-title font-weight-bold">Rasa: </span>'
-    );
-    var $race = $('<p class="card-text ml-4 mb-2"></p>');
-    $race.text(response.race);
-    var $title_sex = $(
-      '<span class="card-title font-weight-bold">Płeć: </span>'
-    );
-    var $sex = $('<p class="card-text ml-4 mb-2"></p>');
-    $sex.text(response.sex);
-    var $title_age = $(
-      '<span class="card-title font-weight-bold">Wiek: </span>'
-    );
-    var $age = $('<p class="card-text ml-4 mb-2"></p>');
-    $age.text(response.age);
-    var $title_weight = $(
-      '<span class="card-title font-weight-bold">Waga: </span>'
-    );
-    var $weight = $('<p class="card-text ml-4 mb-2"></p>');
-    $weight.text(response.weight);
-    var $title_sterilized_castrated = $(
-      '<span class="card-title font-weight-bold">Wysterylizowana/Wykastrowany: </span>'
-    );
-    var $sterilized_castrated = $('<p class="card-text ml-4 mb-2"></p>');
-    $sterilized_castrated.text(response.sterilized_castrated);
-    var $title_description = $(
-      '<span class="card-title font-weight-bold">Opis: </span>'
-    );
-    var $description = $('<p class="card-text text-justify"></p>');
-    $description.text(response.description);
+    var formData = {
+      species_dog: $search_form.find("#dog").prop("checked"),
+      species_cat: $search_form.find("#cat").prop("checked"),
+      species_other: $search_form.find("#other").prop("checked"),
+      age_from: $search_form.find("#age_from").val(),
+      age_to: $search_form.find("#age_to").val(),
+      sex: $search_form.find("#sex").val(),
+      weight: $search_form.find("#weight").val(),
+      location: $search_form.find("#address").val(),
+      distance: $search_form.find("#distance").val()
+    };
 
-    $card_body.append($title_species);
-    $species.insertAfter($title_species);
-    $title_race.insertAfter($species);
-    $race.insertAfter($title_race);
-    $title_sex.insertAfter($race);
-    $sex.insertAfter($title_sex);
-    $title_age.insertAfter($sex);
-    $age.insertAfter($title_age);
-    $title_weight.insertAfter($age);
-    $weight.insertAfter($title_weight);
-    $title_sterilized_castrated.insertAfter($weight);
-    $sterilized_castrated.insertAfter($title_sterilized_castrated);
-    $title_description.insertAfter($sterilized_castrated);
-    $description.insertAfter($title_description);
-
-    $animal_details.append($name);
-    $card_body.insertAfter($name);
-
-    // Aniamal images card
-    // "image": "http://127.0.0.1:8000/media/img/None/no-img.jpg",
-    // "img_main": "http://www.napaluchu.waw.pl/files/animals_napaluchu/big/180917140617.JPG",
-    // "img_main_alt": "http://www.napaluchu.waw.pl/files/animals_napaluchu/thumbs4/180917140617.JPG",
-    // "img_s": "['http://www.napaluchu.waw.pl/files/animals_napaluchu/big/180917140621.JPG', 'http://www.napaluchu.waw.pl/files/animals_napaluchu/big/180917140625.JPG', 'http://www.napaluchu.waw.pl/files/animals_napaluchu/big/180917140629.JPG']",
-
-    var $animal_images = $("#animal_images");
-    var $carousel_item_img_main = $('<div class="carousel-item active">');
-    var $animal_img_main = $('<img class="d-block img-fluid" src="" alt="">');
-
-    if (response.img_main != "") {
-      $animal_img_main.attr("src", response.img_main);
-      $animal_img_main.attr("alt", response.img_main_alt);
-      $carousel_item_img_main.append($animal_img_main);
-    } else {
-      $animal_img_main.attr("src", response.image);
-      $carousel_item_img_main.append($animal_img_main);
+    var url = "http://127.0.0.1:8000/animals/";
+    if (formData.species_dog) {
+      url += "?species=Pies";
+    } else if (formData.species_cat) {
+      url += "?species=Kot";
+    } else if (formData.species_other) {
+      url += "?species=Inne";
     }
 
-    $animal_images.append($carousel_item_img_main);
-
-    // this is working - the img_s in not a list but a str.
-
-    // if (response.img_s != "") {
-    //   for (var i = 0; i < response.img_s.length; i++) {
-    //     var $carousel_item_img_s = $('<div class="carousel-item">');
-    //     var $animal_img_s = $('<img class="d-block img-fluid" src="" alt="">');
-    //     $animal_img_s.attr("src", response.img_s[i]);
-    //     $carousel_item_img_s.append($animal_img_s);
-    //     $animal_images.append($carousel_item_img_s);
-    //   }
-    // }
-
-    // Animal Map Card
-
-    // Datail Buttons
-    var $detail_buttons = $("#detail-buttons");
-
-    if (response.url != "") {
-      var $col = $('<div class="col-lg-3 col-sm-6">');
-      var $detail_button = $(
-        '<a class="btn btn-success btn-sm" href="" target="blank"></a>'
-      );
-      $detail_button.text("Przejdż do strony schroniska");
-      $detail_button.attr("href", response.url);
-      $col.append($detail_button);
-      $detail_buttons.append($col);
+    if (formData.age_from) {
+      url += "&min_age=" + formData.age_from;
     }
+
+    if (formData.age_to) {
+      url += "&max_age=" + formData.age_to;
+    }
+
+    if (formData.sex) {
+      url += "&sex=" + formData.sex;
+    }
+
+    if (formData.location) {
+      url += "&location=" + formData.location;
+    }
+
+    if (formData.distance) {
+      url += "&distance=" + formData.distance;
+    }
+
+    $.ajax({
+      url: url,
+      method: "GET",
+      // data: formData,
+      dataType: "json"
+    }).done(getAnimalCards);
   });
-  // });
 });

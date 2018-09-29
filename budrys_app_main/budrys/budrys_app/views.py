@@ -14,7 +14,8 @@ class AnimalsFilter(FilterSet):
 
     class Meta:
         model = Animals
-        fields = ('age',)
+        fields = ('species', 'race', 'sex',  'age', 'weight')
+
 
 class AnimalsListView(ListCreateAPIView):
     serializer_class = AnimalsSerializer
