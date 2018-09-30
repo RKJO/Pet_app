@@ -1,5 +1,7 @@
 import scrapy
 
+from WebScrapers.parsers import parse_location
+
 
 class KrakowShelterSpider(scrapy.Spider):
     name = "krakow_shelter"
@@ -31,13 +33,13 @@ class KrakowShelterSpider(scrapy.Spider):
             'race': metrics_element[4].split(':')[-1].strip(),
             'sex': "",
             'age': "",
-            'weight': metrics_element[-1].split(':')[-1].strip(),
+            'weight': metrics_element[-1].split(':')[-1].strip()
             'admission_date': metrics_element[2].split(':')[-1].strip(),
             'evidence_number': metrics_element[1].split(':')[-1].strip(),
             'description': ' '.join(' '.join(description_element[-3:]).split()),
             'img_main': response.urljoin(response.css('.animal_big_foto img::attr(src)').extract_first()),
             # 'img_main_alt': response.urljoin(response.css('.photo_gallery_str a::attr(href)').extract()[1]),
             'img_s': [response.urljoin(url) for url in response.css('.photo_gallery_str a::attr(href)').extract()[1:]],
-            'location': ' '.join(response.selector.xpath('//*[@id="footer_right"]/div/text()').extract()[1].split()),
+            'location': parse_location(' '.join(response.selector.xpath('//*[@id="footer_right"]/div/text()').extract()[1].split())),
             'url': response.url
         }

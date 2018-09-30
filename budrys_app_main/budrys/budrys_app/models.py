@@ -3,6 +3,14 @@ from django.db import models
 from datetime import date
 
 
+class Location(models.Model):
+    name = models.CharField(max_length=64, null=True)
+    description = models.TextField()
+    address = models.CharField(max_length=120)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+
+
 class Animals(models.Model):
     name = models.CharField(max_length=64)
     species = models.CharField(max_length=64)
@@ -18,16 +26,9 @@ class Animals(models.Model):
     img_s = ArrayField(
             models.CharField(max_length=250, blank=True),
             size=8)
-    location = models.CharField(max_length=120)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
     url = models.URLField()
     evidence_number = models.CharField(max_length=120, null=True)
     admission_date = models.DateField(default=date.today)
 
 
-# class Location(models.Model):
-#     name = models.CharField(max_length=64, null=True)
-#     description = models.TextField()
-#     location = models.CharField(max_length=120)
-#     latitude = models.FloatField()
-#     longitude = models.FloatField()
-#     animal = models.ForeignKey(Animals, on_delete=models.CASCADE)
