@@ -3,37 +3,43 @@
 
 // Get Gooogle Map
 // index
-function initMap() {
-  var options = {
-    zoom: 8,
-    center: { lat: 52.2297, lng: 21.0122 }
-  };
-  var map = new google.maps.Map(document.getElementById("map"), options);
+
+var latlng = { lat: 51.9194, lng: 19.1451 };
+var marker;
+// var map; /* make the map available in all scopes */
+
+var markersList = []; /* container to store references to newly added markers */
+
+function addMarkers(map, markers) {
+  for (i = 0; i < markers.length; i++) {
+    marker = new google.maps.Marker({
+      position: markers[i].location,
+      position: new google.maps.LatLng(markers[i].lat, markers[i].lng),
+      label: String(markers[i].label),
+      animation: google.maps.Animation.DROP, //google.maps.Animation.BOUNCE,
+      map: map
+    });
+  }
 }
 
-// Adds a marker to the map.
-function addMarker() {
-  var marker = new google.maps.Marker({
-    position: location[i],
-    label: label[i],
-    map: map
-  });
-}
+// google.maps.event.addDomListener(window, "load", initMap);
 
 $(document).ready(function() {
-  // $.ajax({
-  //   url: "http://127.0.0.1:8000/location/",
-  //   method: "GET"
-  // }).done(function(response) {
-  //   for (var i = 0; i < response.length; i++) {
-  //     location.push(
-  //       new google.maps.LatLng(response[i].latitude, response[i].longitude)
-  //     );
-  //     label.push(response[i].animals_count);
-  //   }
-  //   addMarker()
-  // });
-
+  $.ajax({
+    url: "http://127.0.0.1:8000/location/",
+    method: "GET"
+  }).done(function(response) {
+    for (var i = 0; i < response.length; i++) {
+      var name = response[i].name;
+      var label = response[i].animals_count;
+      markersList.push({
+        name: name,
+        lat: response[i].latitude,
+        lng: response[i].longitude,
+        label: label
+      });
+    }
+  });
   // Animal filters Funaction
 
   // Search form
@@ -56,3 +62,13 @@ $(document).ready(function() {
     window.location.href = "animal_list.html";
   });
 });
+
+function initMap() {
+  var options = {
+    zoom: 6,
+    center: latlng
+  };
+  var map = new google.maps.Map(document.getElementById("map"), options);
+
+  addMarkers(map, markersList);
+}
