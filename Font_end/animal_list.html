@@ -15,112 +15,110 @@
 </head>
 
 <body id="animal-list" data-spy="scroll" data-target="#main-nav">
-  <header>
+  <!-- <header> -->
 
-    <!-- SEARCH FORM & MAP-->
-    <section id="form" class="py-3">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-8">
-            <div class="card border-primary mb-resp">
-              <div class="card-header mt-3 mx-3 p-3 h4">
-                Wyszukaj zwierzeta
-              </div>
+  <!-- SEARCH FORM & MAP-->
+  <section id="form" class="py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="card border-primary mb-resp">
+            <div class="card-header mt-3 mx-3 p-3 h4">
+              Wyszukaj zwierzeta
+            </div>
 
-              <div class="card-body">
-                <form id="search-form-list" method="" action="">
+            <div class="card-body">
+              <form id="search-form-list" method="" action="">
 
-                  <div class="m-1">Gatunek:</div>
-                  <div id="radio-form" class="d-flex justify-content-around my-3">
+                <div class="m-1">Gatunek:</div>
+                <div id="radio-form" class="d-flex justify-content-around my-3">
 
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="species" id="dog" value="pies">
-                      <label class="form-check-label" for="dog">Pies</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="species" id="cat" value="kot">
-                      <label class="form-check-label" for="cat">Kot</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="species" id="other" value="inne">
-                      <label class="form-check-label" for="inlineRadio3">Inne</label>
-                    </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="species" id="dog" value="pies">
+                    <label class="form-check-label" for="dog">Pies</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="species" id="cat" value="kot">
+                    <label class="form-check-label" for="cat">Kot</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="species" id="other" value="inne">
+                    <label class="form-check-label" for="other">Inne</label>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-2">
+                    <label for="age_from">Wiek od:</label>
+                    <input type="text" class="form-control" id="age_from" placeholder="">
                   </div>
 
-                  <div class="row">
-                    <div class="col-md-6 mb-2">
-                      <label for="age_from">Wiek od:</label>
-                      <input type="text" class="form-control" id="age_from" placeholder="">
-                    </div>
+                  <div class="col-md-6 mb-2">
+                    <label for="age_to">Wiek do:</label>
+                    <input type="text" class="form-control" id="age_to" placeholder="">
+                  </div>
+                </div>
 
-                    <div class="col-md-6 mb-2">
-                      <label for="age_to">Wiek do:</label>
-                      <input type="text" class="form-control" id="age_to" placeholder="">
-                    </div>
+                <div class="row">
+                  <div class="col-md-6 mb-2">
+                    <label for="sex">Płeć</label>
+                    <select class="custom-select d-block w-100" id="sex">
+                      <option value="">Wybierz</option>
+                      <option value="Samica">Samica</option>
+                      <option value="Samiec">Samiec</option>
+                    </select>
                   </div>
 
-                  <div class="row">
-                    <div class="col-md-6 mb-2">
-                      <label for="sex">Płeć</label>
-                      <select class="custom-select d-block w-100" id="sex">
-                        <option value="">Wybierz</option>
-                        <option value="Samica">Samica</option>
-                        <option value="Samiec">Samiec</option>
-                      </select>
-                    </div>
+                  <div class="col-md-6 mb-2">
+                    <label for="sex">Wielkość</label>
+                    <select class="custom-select d-block w-100" id="weight">
+                      <option value="">Wybierz</option>
+                      <option value="Mały">Mały</option>
+                      <option value="Średni">Średni</option>
+                      <option value="Duży">Duży</option>
+                    </select>
+                  </div>
+                </div>
 
-                    <div class="col-md-6 mb-2">
-                      <label for="sex">Wielkość</label>
-                      <select class="custom-select d-block w-100" id="weight">
-                        <option value="">Wybierz</option>
-                        <option value="Mały">Mały</option>
-                        <option value="Średni">Średni</option>
-                        <option value="Duży">Duży</option>
-                      </select>
-                    </div>
+                <div class="row">
+                  <div class="col-md-8 mb-2">
+                    <label for="address">Adres</label>
+                    <input type="text" class="form-control" id="address" placeholder="Marszałkowska 100, 00-026 Warszawa">
                   </div>
 
-                  <div class="row">
-                    <div class="col-md-8 mb-2">
-                      <label for="address">Adres</label>
-                      <input type="text" class="form-control" id="address" placeholder="Marszałkowska 100, 00-026 Warszawa">
-                    </div>
-
-                    <div class="col-md-4 mb-2">
-                      <label for="distance">Odległość</label>
-                      <select class="custom-select d-block w-100" id="distance">
-                        <option value="">Wybierz</option>
-                        <option value="10">do 10 km</option>
-                        <option value="20">do 20 km</option>
-                        <option value="30">do 30 km</option>
-                        <option value="40">do 40 km</option>
-                        <option value="50">do 50 km</option>
-                        <option value="60">do 60 km</option>
-                        <option value="70">do 70 km</option>
-                        <option value="80">do 80 km</option>
-                        <option value="90">do 90 km</option>
-                        <option value="100">do 100 km</option>
-                      </select>
-                    </div>
+                  <div class="col-md-4 mb-2">
+                    <label for="distance">Odległość</label>
+                    <select class="custom-select d-block w-100" id="distance">
+                      <option value="">Wybierz</option>
+                      <option value="10">do 10 km</option>
+                      <option value="20">do 20 km</option>
+                      <option value="30">do 30 km</option>
+                      <option value="40">do 40 km</option>
+                      <option value="50">do 50 km</option>
+                      <option value="60">do 60 km</option>
+                      <option value="70">do 70 km</option>
+                      <option value="80">do 80 km</option>
+                      <option value="90">do 90 km</option>
+                      <option value="100">do 100 km</option>
+                    </select>
                   </div>
-                  <button id="submit" class="btn btn-primary btn-block">Szukaj</button>
-                </form>
-              </div>
+                </div>
+                <button id="submit" class="btn btn-primary btn-block">Szukaj</button>
+              </form>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="card border-primary">
-              <div class="card-body p-0">
-                <div id="map-list"></div>
-              </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-primary">
+            <div class="card-body p-0">
+              <div id="map-list"></div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-  </header>
-
-
+    </div>
+  </section>
+  <!-- </header> -->
 
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-md navbar-light sticky-top py-2" id="main-nav">
