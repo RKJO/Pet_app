@@ -1,5 +1,6 @@
 import scrapy
 
+from WebScrapers.items import AnimalItem
 from WebScrapers.parsers import parse_location
 
 
@@ -24,21 +25,23 @@ class WroclawShelterSpider(scrapy.Spider):
             yield response.follow(next_group_pages, callback=self.next_page)
 
     def parse(self, response):
+        item = AnimalItem()
         metrics_element = response.css('.table-profile-description td:nth-child(2) > strong::text').extract()
-        yield {
-            'name': response.css('.h-serif-flex::text').extract_first().strip(),
-            'species': metrics_element[-1].split()[0],
-            'race': "",
-            'sex': "",
-            'age': "",
-            'weight': "",
-            'admission_date': metrics_element[1],
-            'sterilized/castrated': "",
-            'evidence_number': metrics_element[0].strip(),
-            'description': response.css('.profile-description-sub-content::text').extract()[1].split("\n")[0].strip(),
-            'img_main': response.urljoin(response.css('.gallery-group a::attr(href)').extract_first()),
-            # 'img_main_alt': response.urljoin(response.css('.photo_gallery_str a::attr(href)').extract()[1]),
-            'img_s': "",
-            'location': parse_location(' '.join([location.strip() for location in response.css('.par-contact-left::text').extract()[1:3]])),
-            'url': response.url,
-        }
+
+        item['name'] = response.css('.h-serif-flex::text').extract_first().strip()
+        item['species'] = (metrics_element[-1].split()[0]).lower()
+        # item['race'] = ""
+        # item['sex'] = ""
+        # item['age'] = ""
+        # item['weight'] = ""
+        item['admission_date'] = metrics_element[1]
+        item['sterilized_castrated'] = ""
+        item['evidence_number'] = metrics_element[0].strip()
+        item['description'] = response.css('.profile-description-sub-content::text').extract()[1].split("\n")[0].strip()
+        item['img_main'] = response.urljoin(response.css('.gallery-group a::attr(href)').extract_first())
+        item['img_main_alt'] = response.urljoin(response.css('.photo_gallery_str a::attr(href)').extract()[1:])
+        # item['img_s'] = ""
+        item['location'] = parse_location(' '.join([location.strip() for location in response.css('.par-contact-left::text').extract()[1:3]]))
+        item['url'] = response.url
+
+        yield item

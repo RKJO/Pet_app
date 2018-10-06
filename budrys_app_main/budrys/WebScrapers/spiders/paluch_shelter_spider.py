@@ -3,7 +3,6 @@ import datetime
 
 from WebScrapers.items import AnimalItem
 from WebScrapers.parsers import parse_location
-from budrys_app.models import Location
 
 
 class PaluchShelterSpider(scrapy.Spider):
@@ -34,7 +33,7 @@ class PaluchShelterSpider(scrapy.Spider):
         item = AnimalItem()
 
         item['name'] = response.css('.info').css('h5::text').extract_first().split(' ')[-5]
-        item['species'] = response.css('.info').css('span::text').extract()[0].split(':')[-1].strip()
+        item['species'] = (response.css('.info').css('span::text').extract()[0].split(':')[-1].strip()).lower()
         item['race'] = response.css('.info').css('span::text').extract()[1].split(':')[-1].strip()
         item['sex'] = response.css('.info').css('span::text').extract()[2].split(':')[-1].strip()
         item['age'] = response.css('.info').css('span::text').extract()[3].split(' ')[-2]

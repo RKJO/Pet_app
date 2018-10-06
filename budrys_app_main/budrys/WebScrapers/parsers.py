@@ -1,7 +1,9 @@
 import requests
 
+from budrys_app.models import Location
 
-def parse_location(self, address):
+
+def parse_location(address):
     try:
         location = Location.objects.get(address__icontains=address)
     except Location.DoesNotExist:
