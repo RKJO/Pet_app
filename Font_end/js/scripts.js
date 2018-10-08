@@ -207,15 +207,17 @@ $(document).ready(function() {
   }
 
   // Animal filters Funaction
+  // all Animals
+  // $.ajax({
+  //   url: "http://127.0.0.1:8000/animals/",
+  //   method: "GET"
+  // }).done(getAnimalCards);
 
   // all Animals + form data from index page.
   var formDataIndex = JSON.parse(window.localStorage.getItem("formDataIndex"));
 
   combineURL(formDataIndex);
-  // $.ajax({
-  //   url: "http://127.0.0.1:8000/animals/",
-  //   method: "GET"
-  // }).done(getAnimalCards);
+  localStorage.clear();
 
   // Search form
   var $search_form = $("#search-form-list");

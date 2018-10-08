@@ -22,6 +22,15 @@ function addMarkers(map, markers) {
   }
 }
 
+function initMap() {
+  var options = {
+    zoom: 6,
+    center: latlng
+  };
+  var map = new google.maps.Map(document.getElementById("map"), options);
+
+  addMarkers(map, markersList);
+}
 // google.maps.event.addDomListener(window, "load", initMap);
 
 $(document).ready(function() {
@@ -39,6 +48,7 @@ $(document).ready(function() {
         label: label
       });
     }
+    console.log(markersList);
   });
   // Animal filters Funaction
 
@@ -62,13 +72,3 @@ $(document).ready(function() {
     window.location.href = "animal_list.html";
   });
 });
-
-function initMap() {
-  var options = {
-    zoom: 6,
-    center: latlng
-  };
-  var map = new google.maps.Map(document.getElementById("map"), options);
-
-  addMarkers(map, markersList);
-}
