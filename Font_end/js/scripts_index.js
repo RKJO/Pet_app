@@ -1,39 +1,18 @@
 // Get the current year for the copyright
 // $("#year").text(new Date().getFullYear());
 
-// Get Gooogle Map
-// index
+// Get Leaflet Map
 
-var latlng = { lat: 51.9194, lng: 19.1451 };
-var marker;
-// var map; /* make the map available in all scopes */
-
-var markersList = []; /* container to store references to newly added markers */
-
-function addMarkers(map, markers) {
-  for (i = 0; i < markers.length; i++) {
-    marker = new google.maps.Marker({
-      position: markers[i].location,
-      position: new google.maps.LatLng(markers[i].lat, markers[i].lng),
-      label: String(markers[i].label),
-      animation: google.maps.Animation.DROP, //google.maps.Animation.BOUNCE,
-      map: map
-    });
-  }
-}
-
-function initMap() {
-  var options = {
-    zoom: 6,
-    center: latlng
-  };
-  var map = new google.maps.Map(document.getElementById("map"), options);
-
-  addMarkers(map, markersList);
-}
-// google.maps.event.addDomListener(window, "load", initMap);
+var latlng = [51.9194, 19.1451];
 
 $(document).ready(function() {
+  var map = L.map("map").setView(latlng, 6);
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
   $.ajax({
     url: "http://127.0.0.1:8000/location/",
     method: "GET"
@@ -41,15 +20,20 @@ $(document).ready(function() {
     for (var i = 0; i < response.length; i++) {
       var name = response[i].name;
       var label = response[i].animals_count;
-      markersList.push({
-        name: name,
-        lat: response[i].latitude,
-        lng: response[i].longitude,
-        label: label
-      });
+      var lat = response[i].latitude;
+      var lng = response[i].longitude;
+      L.marker([lat, lng])
+        .addTo(map)
+        .bindPopup(name)
+        .bindTooltip(String(label), {
+          permanent: true,
+          direction: "left",
+          offset: L.point({ x: 12, y: 15 })
+        })
+        .openTooltip();
     }
-    console.log(markersList);
   });
+
   // Animal filters Funaction
 
   // Search form
