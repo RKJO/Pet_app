@@ -1,38 +1,22 @@
-function initMapDetails() {
-  var name = document.getElementById('name');
+document.addEventListener("DOMContentLoaded", function(event) {
 
-  var location = {lat: parseFloat(name.dataset.lat), lng: parseFloat(name.dataset.lng)};
-  var options = {
-      zoom: 12,
-      center: location
-  };
+    var name = document.getElementById('name');
+    var location = [parseFloat(name.dataset.lat), parseFloat(name.dataset.lng)];
 
-  var map = new google.maps.Map(
-      document.getElementById("map-details"),
-      options
-  );
+    var mapdetails = L.map("map-details").setView(location, 11);
 
-  var marker = new google.maps.Marker({
-      draggable: true,
-      animation: google.maps.Animation.DROP, //google.maps.Animation.BOUNCE,
-      position: location,
-      map: map,
-  });
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(mapdetails);
 
-  var contentString = '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h5 id="firstHeading" class="firstHeading h6 text-center">'+name.dataset.sheltername+'</h5>'+
-            '<div id="bodyContent">'+
-            // can add body content
-            '</div>'+
-            '</div>';
+    L.marker(location)
+        .addTo(mapdetails)
+        .bindPopup(name.dataset.sheltername) //, {maxWidth: 200})
+        .openPopup();
 
-  var infowindow = new google.maps.InfoWindow({
-      content: contentString,
-      maxWidth: 250,
-  });
-  marker.addListener('click', function() {
-    infowindow.open(map, marker);
-        });
-}
+    // var popupContent = document.querySelectorAll('.leaflet-popup-content-wrapper').classList;
+    // console.log(popupContent);
+    // popupContent.firstChild.classList.add('text-center')
+
+});
