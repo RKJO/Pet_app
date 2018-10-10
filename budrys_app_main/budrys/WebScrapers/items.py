@@ -11,7 +11,7 @@ from budrys_app.models import Animals
 
 
 class AnimalItem(DjangoItem):
-    django_model = Animals
+    djangoer_model = Animals
 
 # class AnimalItem(scrapy.Item):
 #     name = scrapy.Field()
