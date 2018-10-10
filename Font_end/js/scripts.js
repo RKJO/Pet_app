@@ -2,37 +2,17 @@
 // $("#year").text(new Date().getFullYear());
 
 // Adds a marker to the map.
-function addMarker() {
-  var marker = new google.maps.Marker({
-    position: location[i],
-    label: label[i],
-    map: map
-  });
-}
 
-// Animal list Map
-function initMapList() {
-  var options = {
-    zoom: 8,
-    center: { lat: 52.2297, lng: 21.0122 }
-  };
-
-  var map = new google.maps.Map(document.getElementById("map-list"), options);
-}
+var latlngList = [52.2297, 21.0122];
 
 $(document).ready(function() {
-  // $.ajax({
-  //   url: "http://127.0.0.1:8000/location/",
-  //   method: "GET"
-  // }).done(function(response) {
-  //   for (var i = 0; i < response.length; i++) {
-  //     location.push(
-  //       new google.maps.LatLng(response[i].latitude, response[i].longitude)
-  //     );
-  //     label.push(response[i].animals_count);
-  //   }
-  //   addMarker()
-  // });
+  // Animal list Map
+  var maplist = L.map("map-list").setView(latlngList, 8);
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(maplist);
 
   // Animal list Page
   var $animals_cards = $("#animal-cards");
