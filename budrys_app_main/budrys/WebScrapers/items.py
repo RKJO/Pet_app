@@ -27,7 +27,6 @@ class AnimalItem(DjangoItem):
 #     img_main = scrapy.Field()
 #     img_main_alt = scrapy.Field()
 #     img_s = scrapy.Field()
-#     location = scrapy.Field()
 #     url = scrapy.Field()
 
 

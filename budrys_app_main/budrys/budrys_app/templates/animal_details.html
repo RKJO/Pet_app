@@ -1,0 +1,106 @@
+{% extends 'base_all.html' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+
+  <!-- SHOWCASE -->
+  <section id="animal-details" class="py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="card-1 card border-primary mb-resp">
+
+            <div id="name" class="card-header mt-3 mx-3 p-3 h4" data-lat="{{animal.location.latitude}}"
+                 data-lng="{{animal.location.longitude}}" data-sheltername="{{animal.location.name}}">
+              {{animal.name}}
+            </div>
+
+            <div class="card-body">
+              <span class="card-title font-weight-bold">Gatunek: </span>
+              <p class="card-text ml-4 mb-2"> {{animal.species}}</p>
+              <span class="card-title font-weight-bold">Rasa: </span>
+              <p class="card-text ml-4 mb-2">{{animal.race}}</p>
+              <span class="card-title font-weight-bold">Płeć: </span>
+              <p class="card-text ml-4 mb-2">{{animal.sex}}</p>
+              <span class="card-title font-weight-bold">Wiek: </span>
+              <p class="card-text ml-4 mb-2">{{animal.age}} lat</p>
+              <span class="card-title font-weight-bold">Waga: </span>
+              <p class="card-text ml-4 mb-2">{{animal.weight}}</p>
+              <span class="card-title font-weight-bold">Wysterylizowana/Wykastrowany:</span>
+              <p class="card-text ml-4">{{animal.sterilized_castrated}}</p>
+              <hr>
+              <span class="card-title font-weight-bold">Opis: </span>
+                  {% if animal.description %}
+                    <p class="card-text text-justify">{{animal.description}}</p>
+                  {% else %}
+                    <p class="card-text ml-4"> Brak informacji </p>
+                  {% endif %}
+
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+
+          <div class="card-2 card border-primary mb-3">
+
+            <!-- SLIDER WITH CONTROLS -->
+            <div id="img-carousel" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+
+                {% if animal.img_main %}
+
+                  <div class="carousel-item active">
+                    <img class="d-block img-fluid" src={{animal.img_main}} alt="Image not found">
+                  </div>
+
+                {% else %}
+
+                  <div class="carousel-item active">
+                    <img class="d-block img-fluid" src={{animal.main}} alt="Image not found">
+                  </div>
+
+                {% endif %}
+
+                {% if animal.img_s %}
+                  {% for img in animal.img_s %}
+                    <div class="carousel-item">
+                      <img class="d-block img-fluid" src={{img}} alt="Second Slide">
+                    </div>
+                  {% empty %}
+                               Brak zwierząt do adpocji
+                  {% endfor %}
+
+                      <!--&lt;!&ndash; CONTROLS &ndash;&gt;-->
+                      <!--<a href="img-carousel" class="carousel-control-prev" data-slide="prev">-->
+                        <!--<span class="carousel-control-prev-icon"></span>-->
+                      <!--</a>-->
+
+                      <!--<a href="img-carousel" class="carousel-control-next" data-slide="next">-->
+                        <!--<span class="carousel-control-next-icon"></span>-->
+                      <!--</a>-->
+                  {% endif %}
+                </div>
+            </div>
+
+          </div>
+
+          <div class="card-3 card border-primary mb-resp">
+            <div class="card-body p-0">
+              <div id="map-details"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="container mt-2">
+      <div class="row">
+        <div class="col-lg-3"><a class="btn btn-success btn-sm" href={{animal.url}}>Przejdż do strony schroniska</a></div>
+      </div>
+    </div>
+</section>
+
+{% endblock %}

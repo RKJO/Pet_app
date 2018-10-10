@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+    crossorigin="">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="jquery/jquery-3.3.1.js"></script>
+
+  <title>Budrys_app</title>
+</head>
+
+<body>
+
+  <body id="home" data-spy="scroll" data-target="#main-nav">
+    <header>
+      <!-- SHOWCASE -->
+      <section id="showcase" class="py-5">
+        <div class="primary-overlay text-white">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-2 text-center align-self-end">
+                <img id="cat" src="img/cat_left.png" alt="" class="img-fluid d-none d-lg-block">
+              </div>
+              <div class="col-md-8 text-center align-self-center">
+                <h1 class="display-4 mt-5 pt-3">
+                  Pomóż znaleźć nowy dom... </h1>
+                <p class="h5 lead text-right">znajdź przyjaciela na całe życie.</p>
+              </div>
+              <div class=" col-md-2 align-self-end">
+                <img src="img/dog_right.png" alt="" class="img-fluid d-none d-lg-block">
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <!--NAVBAR-->
+    <nav class="navbar navbar-expand-md navbar-light sticky-top py-2" id="main-nav">
+      <div class="container">
+        <a href="#home" class="navbar-brand">
+          <img src="img/logo.png" width="50" alt="">
+          <h4 class="d-inline align-middle">Budrys App</h4>
+        </a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a href="#" class="nav-link active">Home</a>
+            </li>
+            <!-- <li class="nav-item">
+              <a href="animal_list.html" class="nav-link">Wyszukaj</a>
+            </li> -->
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- BOXES -->
+    <section id="boxes" class="py-5">
+      <div class="container">
+        <div class="row">
+
+          <div class="order-lg-2 col-lg-4">
+            <div class="card border-primary mb-resp">
+
+              <div class="card-header mt-3 mx-3 p-3 h4">
+                Wyszukaj zwierzeta
+              </div>
+
+              <div class="card-body px-3">
+                <form id="search-form-index" method="" action="">
+
+                  <div class="m-1">Gatunek:</div>
+                  <div id="radio-form" class="d-flex justify-content-around my-3">
+
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="species" id="dog" value="pies">
+                      <label class="form-check-label" for="dog">Pies</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="species" id="cat" value="kot">
+                      <label class="form-check-label" for="cat">Kot</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="species" id="other" value="inne">
+                      <label class="form-check-label" for="other">Inne</label>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6 mb-2">
+                      <label for="age_from">Wiek od:</label>
+                      <input type="text" class="form-control" id="age_from" placeholder="">
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+                      <label for="age_to">Wiek do:</label>
+                      <input type="text" class="form-control" id="age_to" placeholder="">
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12 mb-2">
+                      <label for="sex">Płeć</label>
+                      <select class="custom-select d-block w-100" id="sex">
+                        <option value="">Wybierz</option>
+                        <option>Samica</option>
+                        <option>Samiec</option>
+                      </select>
+                    </div>
+
+                    <div class="col-md-12 mb-2">
+                      <label for="sex">Wielkość</label>
+                      <select class="custom-select d-block w-100" id="sex">
+                        <option value="">Wybierz</option>
+                        <option>Mały</option>
+                        <option>Średni</option>
+                        <option>Duży</option>
+                      </select>
+                    </div>
+                  </div>
+                  <button class="btn btn-primary btn-block align-self-end" id="submit_index">Szukaj</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="order-lg-1 col-lg-8">
+            <div class="card text-center border-primary mb-resp">
+              <div class="card-body p-0">
+                <div id="map"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+      crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+      crossorigin=""></script>
+    <!-- <script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_grQnCvjoPq5sAzIl1ih7IA28tvLf4Qc&amp;callback=initMap"></script> -->
+    <script src="js/scripts_index.js"></script>
+
+  </body>
+
+
+</html>

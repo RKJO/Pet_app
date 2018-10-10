@@ -1,5 +1,8 @@
 import scrapy
 
+from WebScrapers.items import AnimalItem
+from WebScrapers.parsers import parse_location
+
 
 class KrakowShelterSpider(scrapy.Spider):
     name = "krakow_shelter"
@@ -23,21 +26,25 @@ class KrakowShelterSpider(scrapy.Spider):
             yield response.follow(next_group_pages, callback=self.next_page)
 
     def parse(self, response):
+        item = AnimalItem()
+
         metrics_element = response.css('.default_description').css('b::text').extract()
         description_element = response.css('.default_description').css('p::text').extract()
-        yield {
-            'name': metrics_element[0],
-            'species': metrics_element[3].split(':')[-1].strip(),
-            'race': metrics_element[4].split(':')[-1].strip(),
-            'sex': "",
-            'age': "",
-            'weight': metrics_element[-1].split(':')[-1].strip(),
-            'admission_date': metrics_element[2].split(':')[-1].strip(),
-            'evidence_number': metrics_element[1].split(':')[-1].strip(),
-            'description': ' '.join(' '.join(description_element[-3:]).split()),
-            'img_main': response.urljoin(response.css('.animal_big_foto img::attr(src)').extract_first()),
-            # 'img_main_alt': response.urljoin(response.css('.photo_gallery_str a::attr(href)').extract()[1]),
-            'img_s': [response.urljoin(url) for url in response.css('.photo_gallery_str a::attr(href)').extract()[1:]],
-            'location': ' '.join(response.selector.xpath('//*[@id="footer_right"]/div/text()').extract()[1].split()),
-            'url': response.url
-        }
+
+        item['name'] = metrics_element[0]
+        item['species'] = metrics_element[3].split(':')[-1].strip()
+        item['race'] = metrics_element[4].split(':')[-1].strip()
+        # item['sex'] = ""
+        # item['age'] = ""
+        item['weight'] = metrics_element[-1].split(':')[-1].strip()
+        item['admission_date'] = metrics_element[2].split(':')[-1].strip()
+        item['evidence_number'] = metrics_element[1].split(':')[-1].strip()
+        item['description'] = ' '.join(' '.join(description_element[-3:]).split())
+        item['img_main'] = response.urljoin(response.css('.animal_big_foto img::attr(src)').extract_first())
+        # item['img_main_alt'] = ""
+        item['img_s'] = [response.urljoin(url) for url in response.css('.photo_gallery_str a::attr(href)').extract()[1:]]
+        item['location'] = parse_location(' '.join(response.selector.xpath('//*[@id="footer_right"]/div/text()').extract()[1].split()))
+        item['url'] = response.url
+
+        yield item
+
