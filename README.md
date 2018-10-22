@@ -5,14 +5,14 @@ At this stage, i cooperates with shelters to further develop applications adapti
 
 ## Deployment
 * [Budrys App](www.budrys.org) - link to web
-* [api](www.budrys.org/animals/) - Dependency Management
+* [api](www.budrys.org/animals/) - REST api
 
 ### TO DO:
 - updating database using CRON
 - add pages 
   * to create and login user
   * CRUD pages for informations about animal 
-  * searching animals by locatio
+  * searching animals by location
   * ...
 - Blog with tips on training and raising animals.
 - Events
