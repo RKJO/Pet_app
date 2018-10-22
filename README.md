@@ -3,17 +3,16 @@ An app to search for animals for adoption. An informations about animals comes f
 
 At this stage, i cooperates with shelters to further develop applications adapting it to their needs.
 
-### app: www.budrys.org
+## Built With
+* [Budrys App](www.budrys.org) - link to web
+* [api](www.budrys.org/animals/) - Dependency Management
 
-### api: www.budrys.org/animals/
-
-
-TO DO:
+### TO DO:
 - updating database using CRON
 - add pages 
-      > to create and login user
-      > crud pages for informations about animal 
-      > searching animals by locatio
-      > ...
+* to create and login user
+* CRUD pages for informations about animal 
+* searching animals by locatio
+*...
 - Blog with tips on training and raising animals.
 - Events
