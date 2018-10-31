@@ -2,7 +2,7 @@ import scrapy
 import datetime
 
 from WebScrapers.items import AnimalItem
-from WebScrapers.parsers import parse_location
+from WebScrapers.parsers import parse_location, animal_update_or_create
 
 
 class PaluchShelterSpider(scrapy.Spider):
@@ -47,4 +47,5 @@ class PaluchShelterSpider(scrapy.Spider):
         item['location'] = parse_location(response.css('#content_slider_left_content_content > div:nth-child(2)::text').extract_first().split(': ')[-1])
         item['url'] = response.url
 
-        yield item
+        animal_update_or_create(item)
+        # yield item

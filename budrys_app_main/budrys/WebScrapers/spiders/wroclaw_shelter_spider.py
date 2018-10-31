@@ -1,7 +1,7 @@
 import scrapy
 
 from WebScrapers.items import AnimalItem
-from WebScrapers.parsers import parse_location
+from WebScrapers.parsers import parse_location, animal_update_or_create
 
 
 class WroclawShelterSpider(scrapy.Spider):
@@ -41,7 +41,8 @@ class WroclawShelterSpider(scrapy.Spider):
         item['img_main'] = response.urljoin(response.css('.gallery-group a::attr(href)').extract_first())
         item['img_main_alt'] = response.urljoin(response.css('.photo_gallery_str a::attr(href)').extract()[1:])
         # item['img_s'] = ""
-        item['location'] = parse_location(' '.join([location.strip() for location in response.css('.par-contact-left::text').extract()[1:3]]))
+        item['location'] = parse_location((' '.join([location.strip() for location in response.css('.par-contact-left::text').extract()[1:3]])).split('. ')[1])
         item['url'] = response.url
 
-        yield item
+        animal_update_or_create(item)
+        # yield item

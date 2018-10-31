@@ -1,7 +1,7 @@
 import scrapy
 
 from WebScrapers.items import AnimalItem
-from WebScrapers.parsers import parse_location
+from WebScrapers.parsers import parse_location, animal_update_or_create
 
 
 class KrakowShelterSpider(scrapy.Spider):
@@ -46,5 +46,5 @@ class KrakowShelterSpider(scrapy.Spider):
         item['location'] = parse_location(' '.join(response.selector.xpath('//*[@id="footer_right"]/div/text()').extract()[1].split()))
         item['url'] = response.url
 
-        yield item
-
+        animal_update_or_create(item)
+        # yield item

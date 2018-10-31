@@ -50,16 +50,21 @@
             <div id="img-carousel" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
 
-                {% if animal.img_main %}
+                {% if animal.img_main != "" %}
 
                   <div class="carousel-item active">
-                    <img class="d-block img-fluid" src={{animal.img_main}} alt="Image not found">
+                    <a href={{animal.img_main}} data-lightbox="animal-images">
+                        <img class="d-block img-fluid" src={{animal.img_main}} alt="Image not found">
+                    </a>
+
                   </div>
 
                 {% else %}
 
                   <div class="carousel-item active">
-                    <img class="d-block img-fluid" src={{animal.main}} alt="Image not found">
+                    <a href={{animal.image}} data-lightbox="animal-images">
+                      <img class="d-block img-fluid" src={{animal.image}} alt="Image not found">
+                    </a>
                   </div>
 
                 {% endif %}
@@ -67,7 +72,9 @@
                 {% if animal.img_s %}
                   {% for img in animal.img_s %}
                     <div class="carousel-item">
-                      <img class="d-block img-fluid" src={{img}} alt="Second Slide">
+                      <a href={{animal.img_s}} data-lightbox="animal-images">
+                          <img class="d-block img-fluid" src={{animal.img_s}} alt="Second Slide">
+                      </a>
                     </div>
                   {% empty %}
                                Brak zwierząt do adpocji

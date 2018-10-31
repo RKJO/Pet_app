@@ -3,7 +3,18 @@ from django.db import models
 from datetime import date
 
 
-class Location(models.Model):
+class AddAndCreate(models.Model):
+    created_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateField(auto_now=True)
+
+    def get_username(self):
+        return self.created_at, self.created_at
+
+    class Meta:
+        abstract = True
+
+
+class Location(AddAndCreate):
     name = models.CharField(max_length=120, null=True)
     description = models.TextField()
     address = models.CharField(max_length=120)
@@ -11,7 +22,7 @@ class Location(models.Model):
     longitude = models.FloatField()
 
 
-class Animals(models.Model):
+class Animals(AddAndCreate):
     name = models.CharField(max_length=64)
     species = models.CharField(max_length=64, null=True)
     race = models.CharField(max_length=64, null=True)
