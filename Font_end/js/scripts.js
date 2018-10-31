@@ -153,11 +153,11 @@ $(document).ready(function() {
   function combineURL(formData) {
     var url = "http://127.0.0.1:8000/animals/";
     if (formData.species_dog) {
-      url += "?species=Pies";
+      url += "?species=pies";
     } else if (formData.species_cat) {
-      url += "?species=Kot";
+      url += "?species=kot";
     } else if (formData.species_other) {
-      url += "?species=Inne";
+      url += "?species=inne";
     }
 
     if (formData.age_from) {
@@ -188,17 +188,19 @@ $(document).ready(function() {
 
   // Animal filters Funaction
   // all Animals
-  // $.ajax({
-  //   url: "http://127.0.0.1:8000/animals/",
-  //   method: "GET"
-  // }).done(getAnimalCards);
+  //
 
   // all Animals + form data from index page.
   var formDataIndex = JSON.parse(window.localStorage.getItem("formDataIndex"));
-
-  combineURL(formDataIndex);
-  localStorage.clear();
-
+  if (formDataIndex) {
+    combineURL(formDataIndex);
+    localStorage.clear();
+  } else {
+    $.ajax({
+      url: "http://127.0.0.1:8000/animals/",
+      method: "GET"
+    }).done(getAnimalCards);
+  }
   // Search form
   var $search_form = $("#search-form-list");
   var $submit_btn = $("#submit");
