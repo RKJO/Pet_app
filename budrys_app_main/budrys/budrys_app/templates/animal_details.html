@@ -10,8 +10,8 @@
   <section id="animal-details" class="py-3">
     <div class="container">
       <div class="row">
-        <div class="col-lg-6">
-          <div class="card-1 card border-primary mb-resp">
+        <div class="col-lg-6 mr-0 pr-0">
+          <div class="card-description card border-primary mb-resp">
 
             <div id="name" class="card-header mt-3 mx-3 p-3 h4" data-lat="{{animal.location.latitude}}"
                  data-lng="{{animal.location.longitude}}" data-sheltername="{{animal.location.name}}">
@@ -43,61 +43,67 @@
           </div>
         </div>
         <div class="col-lg-6">
-
-          <div class="card-2 card border-primary mb-3">
-
-            <!-- SLIDER WITH CONTROLS -->
-            <div id="img-carousel" class="carousel slide" data-ride="carousel">
-              <div class="carousel-inner">
-
-                {% if animal.img_main != "" %}
-
-                  <div class="carousel-item active">
-                    <a href={{animal.img_main}} data-lightbox="animal-images">
-                        <img class="d-block img-fluid" src={{animal.img_main}} alt="Image not found">
-                    </a>
-
+           <div class="row">
+            <div class="col-md-9">
+              <!-- Home Main Image -->
+              {% if animal.img_main %}
+                <a href={{animal.img_main}} data-lightbox="animal-images">
+                  <div class="card card-img-main border-primary mb-2">
+                    <img src={{animal.img_main}} alt="{{animal.name}} do adpocji" class="card-img-top">
                   </div>
+                </a>
 
-                {% else %}
+              {% elif animal.img_main_alt %}
 
-                  <div class="carousel-item active">
-                    <a href={{animal.image}} data-lightbox="animal-images">
-                      <img class="d-block img-fluid" src={{animal.image}} alt="Image not found">
-                    </a>
+                <a href={{animal.img_main_alt}} data-lightbox="animal-images">
+                  <div class="card card-img-main border-primary mb-2">
+                    <img src={{animal.img_main_alt}} alt="{{animal.name}} do adpocji" class="card-img-top">
                   </div>
+                </a>
 
-                {% endif %}
+              {% else  %}
+                <a href={{animal.image}} data-lightbox="animal-images">
+                  <div class="card card-img-main border-primary mb-2">
+                    <img src={{animal.image}} alt="{{animal.name}} do adpocji" class="card-img-top">
+                  </div>
+                </a>
 
+              {% endif %}
+            </div>
+
+             <!-- Thumbnails -->
+            <div class="col-md-3  m-0 p-0">
+
+              <div class="row thumbs">
                 {% if animal.img_s %}
                   {% for img in animal.img_s %}
-                    <div class="carousel-item">
-                      <a href={{animal.img_s}} data-lightbox="animal-images">
-                          <img class="d-block img-fluid" src={{animal.img_s}} alt="Second Slide">
+                    <div class="col-12">
+                      <a href={{img}} data-lightbox="animal-images">
+                        <div class="card card-image border-primary mb-2">
+                          <img src={{img}} alt="{{animal.name}} do adpocji" class="card-img-top">
+                        </div>
                       </a>
                     </div>
+
                   {% empty %}
                                Brak zwierząt do adpocji
                   {% endfor %}
+                {% endif %}
 
-                      <!--&lt;!&ndash; CONTROLS &ndash;&gt;-->
-                      <!--<a href="img-carousel" class="carousel-control-prev" data-slide="prev">-->
-                        <!--<span class="carousel-control-prev-icon"></span>-->
-                      <!--</a>-->
+              </div>
 
-                      <!--<a href="img-carousel" class="carousel-control-next" data-slide="next">-->
-                        <!--<span class="carousel-control-next-icon"></span>-->
-                      <!--</a>-->
-                  {% endif %}
-                </div>
             </div>
-
           </div>
 
-          <div class="card-3 card border-primary mb-resp">
-            <div class="card-body p-0">
-              <div id="map-details"></div>
-            </div>
+             <!-- Map -->
+          <div class="row mt-2">
+            <div class="col-md-12 mr-0 pr-0">
+              <div class="card-map card border-primary m-0 p-0 mb-resp">
+                <div class="card-body p-0">
+                  <div id="map-details"></div>
+                </div>
+              </div>
+             </div>
           </div>
 
         </div>
