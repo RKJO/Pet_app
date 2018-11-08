@@ -2,7 +2,7 @@ import scrapy
 import datetime
 
 from WebScrapers.items import AnimalItem
-from WebScrapers.parsers import parse_location, animal_update_or_create
+from WebScrapers.parsers import parse_location, animal_update_or_create, parse_size
 
 
 class PaluchShelterSpider(scrapy.Spider):
@@ -35,9 +35,10 @@ class PaluchShelterSpider(scrapy.Spider):
         item['name'] = response.css('.info').css('h5::text').extract_first().split(' ')[-5]
         item['species'] = (response.css('.info').css('span::text').extract()[0].split(':')[-1].strip()).lower()
         item['race'] = response.css('.info').css('span::text').extract()[1].split(':')[-1].strip()
-        item['sex'] = response.css('.info').css('span::text').extract()[2].split(':')[-1].strip()
+        item['sex'] = (response.css('.info').css('span::text').extract()[2].split(':')[-1].strip()).lower()
         item['age'] = response.css('.info').css('span::text').extract()[3].split(' ')[-2]
         item['weight'] = int(response.css('.info').css('span::text').extract()[4].split(' ')[1])
+        item['size'] = parse_size(item.get('weight'), item.get('species'))
         item['admission_date'] = self.parse_administration_date(response.css('.info').css('span::text').extract()[5].split(' ')[-1])
         item['evidence_number'] = response.css('.info').css('span::text').extract()[6].split(' ')[-1]
         item['description'] = ' '.join(' '.join(response.css('.description::text').extract()).split())
@@ -48,4 +49,3 @@ class PaluchShelterSpider(scrapy.Spider):
         item['url'] = response.url
 
         animal_update_or_create(item)
-        # yield item

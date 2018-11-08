@@ -16,6 +16,31 @@ def parse_location(address):
         return location
 
 
+def parse_size( weight, species):
+    if species == 'pies':
+        if weight <= 5:
+            return 'mały'
+        elif 6 <= weight <= 10:
+            return 'średni mniejszy'
+        elif 11 <= weight <= 15:
+            return 'średni'
+        elif 16 <= weight <= 20:
+            return 'śwedni większy'
+        elif 21 <= weight:
+            return 'duży'
+    else:
+        if weight <= 2:
+            return 'mały'
+        elif 3 <= weight <= 5:
+            return 'średni mniejszy'
+        elif 6 <= weight <= 8:
+            return 'średni'
+        elif 9 <= weight <= 11:
+            return 'śwedni większy'
+        elif 11 <= weight:
+            return 'duży'
+
+
 def animal_update_or_create(item):
     animal, created = Animals.objects.update_or_create(url=item['url'],
                                                        defaults=item
