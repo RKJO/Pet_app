@@ -29,6 +29,7 @@ class Animals(AddAndCreate):
     sex = models.CharField(max_length=64, null=True)
     age = models.IntegerField(null=True)
     weight = models.CharField(max_length=64, null=True)
+    size = models.CharField(max_length=16, null=True)
     sterilized_castrated = models.CharField(max_length=64)
     description = models.TextField()
     image = models.ImageField(upload_to='img/', default='img/None/no-img.jpg')
