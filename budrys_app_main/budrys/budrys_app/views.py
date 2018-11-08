@@ -17,7 +17,7 @@ class AnimalsFilter(FilterSet):
 
     class Meta:
         model = Animals
-        fields = ('species', 'race', 'sex',  'age', 'weight')
+        fields = ('species', 'race', 'sex',  'age', 'weight', 'location')
 
 
 class AnimalsListView(ListCreateAPIView):
@@ -28,7 +28,7 @@ class AnimalsListView(ListCreateAPIView):
     pagination_class = PageNumberPagination
 
 
-class CountAninmalView(APIView):
+class CountAnimalView(APIView):
 
     def get(self, request):
         pass

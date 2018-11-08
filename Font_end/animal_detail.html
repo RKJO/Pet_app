@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/style.css">
   <script src="jquery/jquery-3.3.1.js"></script>
-  <script src="jquery/jquery-3.3.1.js"></script>
 
   <title>Budrys_app</title>
 </head>
@@ -46,40 +45,72 @@
   <section id="animal-details" class="py-3">
     <div class="container">
       <div class="row">
-        <div class="col-lg-6">
-          <div id="animal-details-card" class="card-1 card border-primary mb-resp">
+        <div class="col-lg-6 mr-0 pr-0">
+          <div id="animal-details-card" class="card-description card-decription card border-primary mb-resp">
             <!-- Animal details from jQuery -->
           </div>
         </div>
+        
         <div class="col-lg-6">
+          <div class="row">
+            <div class="col-md-9">
+              <!-- Home Main Image -->
+              <a href="https://source.unsplash.com/1600x900/?dog,dogs" data-lightbox="animal-images">
+                <div class="card card-img-main border-primary">
+                  <img src="https://source.unsplash.com/1600x900/?dog,dogs" alt="" class="card-img-top">
+                </div>
+              </a>
 
-          <div class="card-2 card border-primary mb-3">
+              <!-- Thumbnails -->
+            </div>
 
-            <!-- SLIDER WITH CONTROLS -->
-            <div id="img-carousel" class="carousel slide " data-ride="carousel">
-              <div id="animal_images" class="carousel-inner">
-                <!-- img's from jQuery -->
+            <div class="col-md-3  m-0 p-0">
+
+              <div class="row thumbs">
+                
+                <div class="col-12">
+                  <a href="https://source.unsplash.com/800x600/?dog,dogs" data-lightbox="animal-images">
+                    <div class="card card-image border-primary mb-2">
+                      <img src="https://source.unsplash.com/800x600/?dog,dogs" alt="" class="card-img-top">
+                    </div>
+                  </a>
+                </div>
+                
+                <div class="col-12">
+                  <a href="https://source.unsplash.com/weekly?dog/800x600" data-lightbox="animal-images">
+                    <div class="card card-image border-primary mb-2">
+                      <img src="https://source.unsplash.com/weekly?dog/800x600" alt="" class="card-img-top">
+                    </div>
+                  </a>
+                </div>
+                
+                <div class="col-12">
+                  <a href="https://source.unsplash.com/daily?dog/800x600" data-lightbox="animal-images">
+                    <div class="card card-image border-primary mb-2">
+                      <img src="https://source.unsplash.com/daily?dog/800x600" alt="" class="card-img-top">
+                    </div>
+                  </a>
+                </div>  
+              
               </div>
-
-              <!-- CONTROLS -->
-              <a href="img-carousel" class="carousel-control-prev" data-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-              </a>
-
-              <a href="img-carousel" class="carousel-control-next" data-slide="next">
-                <span class="carousel-control-next-icon"></span>
-              </a>
+            
             </div>
           </div>
+        
 
-          <div class="card-3 card border-primary mb-resp">
-            <div class="card-body p-0">
-              <div id="map-details"></div>
-            </div>
+          <div class="row mt-2">
+            <div class="col-md-12 mr-0 pr-0">
+              <div class="card-map card border-primary m-0 p-0 mb-resp">
+                <div class="card-body p-0">
+                  <div id="map-details"></div>
+                </div>
+              </div>
+             </div> 
           </div>
-
         </div>
+
       </div>
+    </div>
     </div>
     <div class="container mt-2">
       <div id="detail-buttons" class="row">
@@ -103,3 +134,6 @@
 </body>
 
 </html>
+<!-- https://source.unsplash.com/1600x900/?dog,dogs -->
+<!-- https://source.unsplash.com/weekly?dog/800x600 -->
+<!-- https://source.unsplash.com/daily?dog/800x600 -->

@@ -72,26 +72,29 @@ $primary-overlay: rgba(50, 146, 166, 0.8);
 
 // Animal Detail
 #animal-details {
-  .card-1 {
+  .card-description {
     min-height: 49.3rem;
     font-size: 0.9rem;
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
       "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   }
 
-  .card-2 {
-    #img-carousel {
-      .carousel-item {
-        height: 24rem;
-      }
-      .carousel-item img {
-        height: 100%;
-        width: 100%;
-      }
+  .card-img-main{
+    .card-img-top {
+      height: 24rem;
+      object-fit: fill;
+      object-position: 0px 20%;
     }
   }
 
-  .card-3 {
+  .card-image {
+    .card-img-top {
+      height: 7.6rem;
+      object-fit: contain;
+    }
+  }
+
+  .card-map {
     min-height: 24rem;
     #map-details {
       height: 24rem;
