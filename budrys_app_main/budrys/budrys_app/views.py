@@ -17,7 +17,7 @@ class AnimalsFilter(FilterSet):
 
     class Meta:
         model = Animals
-        fields = ('species', 'race', 'sex',  'age', 'weight', 'location')
+        fields = ('name', 'species', 'race', 'sex',  'age', 'size', 'location')
 
 
 class AnimalsListView(ListCreateAPIView):

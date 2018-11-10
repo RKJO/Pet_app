@@ -12,6 +12,7 @@ class AnimalsSerializer(serializers.HyperlinkedModelSerializer):
                   "sex",
                   "age",
                   "weight",
+                  "size",
                   "sterilized_castrated",
                   "description",
                   "image",

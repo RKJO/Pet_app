@@ -1,6 +1,6 @@
 import scrapy
 import datetime
-
+from bs4 import BeautifulSoup
 from WebScrapers.items import AnimalItem
 from WebScrapers.parsers import parse_location, animal_update_or_create, parse_size
 
@@ -41,7 +41,7 @@ class PaluchShelterSpider(scrapy.Spider):
         item['size'] = parse_size(item.get('weight'), item.get('species'))
         item['admission_date'] = self.parse_administration_date(response.css('.info').css('span::text').extract()[5].split(' ')[-1])
         item['evidence_number'] = response.css('.info').css('span::text').extract()[6].split(' ')[-1]
-        item['description'] = ' '.join(' '.join(response.css('.description::text').extract()).split())
+        item['description'] = ''.join((BeautifulSoup(str(''.join(response.css('.description').extract())), 'html.parser').get_text()).strip().split('\n')).replace("\r", "")
         item['img_main'] = response.urljoin(response.css('#main_image_cont a::attr(href)').extract_first())
         item['img_main_alt'] = response.urljoin(response.css('#main_image_cont img::attr(src)').extract_first())
         item['img_s'] = [response.urljoin(url) for url in response.css('div.ani_image_bottom a::attr(href)').extract()[0:3]]

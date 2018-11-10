@@ -69,8 +69,8 @@ $(document).ready(function() {
           $result[i].age +
           polishPlural(" rok", " lata", " lat", $result[i].age)
       );
-      var $weight = $('<p class="card-text"></p>');
-      $weight.text("Wielkość: " + $result[i].weight);
+      var $size = $('<p class="card-text"></p>');
+      $size.text("Wielkość: " + $result[i].size);
       var $button = $(
         '<a class="details btn btn-outline-primary btn-block" data-id="' +
           $result[i].id +
@@ -89,8 +89,8 @@ $(document).ready(function() {
       $hr.insertAfter($race);
       $sex.insertAfter($hr);
       $age.insertAfter($sex);
-      $weight.insertAfter($age);
-      $button.insertAfter($weight);
+      $size.insertAfter($age);
+      $button.insertAfter($size);
       $card_body.insertAfter($img);
     }
 
@@ -151,13 +151,13 @@ $(document).ready(function() {
   // function Combine URL
 
   function combineURL(formData) {
-    var url = "http://127.0.0.1:8000/animals/";
+    var url = "http://127.0.0.1:8000/animals/?species=";
     if (formData.species_dog) {
-      url += "?species=pies";
+      url += "pies";
     } else if (formData.species_cat) {
-      url += "?species=kot";
+      url += "kot";
     } else if (formData.species_other) {
-      url += "?species=inne";
+      url += "inne";
     }
 
     if (formData.age_from) {
@@ -170,6 +170,10 @@ $(document).ready(function() {
 
     if (formData.sex) {
       url += "&sex=" + formData.sex;
+    }
+
+     if (formData.size) {
+      url += "&size=" + formData.size;
     }
 
     if (formData.location) {
@@ -216,7 +220,7 @@ $(document).ready(function() {
       age_from: $search_form.find("#age_from").val(),
       age_to: $search_form.find("#age_to").val(),
       sex: $search_form.find("#sex").val(),
-      weight: $search_form.find("#weight").val(),
+      size: $search_form.find("#size").val(),
       location: $search_form.find("#address").val(),
       distance: $search_form.find("#distance").val()
     };

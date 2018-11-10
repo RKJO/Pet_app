@@ -49,7 +49,7 @@ $(document).ready(function() {
       age_from: $search_form.find("#age_from").val(),
       age_to: $search_form.find("#age_to").val(),
       sex: $search_form.find("#sex").val(),
-      weight: $search_form.find("#weight").val()
+      size: $search_form.find("#size").val()
     };
 
     window.localStorage.setItem("formDataIndex", JSON.stringify(formDataIndex));
