@@ -14,7 +14,7 @@ django-cors-headers==2.4.0
 django-filter==2.0.0
 django-filters==0.2.1
 django-rest-framework==0.1.0
-djangorestframework==3.8.2
+djangorestframework==3.11.2
 hyperlink==18.0.0
 idna==2.7
 incremental==17.5.0
